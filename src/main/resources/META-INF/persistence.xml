@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+	<persistence-unit name="primary">
+		<jta-data-source>java:jboss/datasources/otc_DS</jta-data-source>
+		
+		<!-- Entities -->
+		<class>ch.opentrainingcenter.model.Athlete</class>
+		<class>ch.opentrainingcenter.model.Health</class>
+		<class>ch.opentrainingcenter.model.LapInfo</class>
+		<class>ch.opentrainingcenter.model.Planungwoche</class>
+		<class>ch.opentrainingcenter.model.Route</class>
+		<class>ch.opentrainingcenter.model.Shoe</class>
+		<class>ch.opentrainingcenter.model.Streckenpunkte</class>
+		<class>ch.opentrainingcenter.model.Tracktrainingproperty</class>
+		<class>ch.opentrainingcenter.model.Training</class>
+		<class>ch.opentrainingcenter.model.Weather</class>
+		
+		<!-- Hibernate Properties --> 
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.show_sql" value="false" />
+		</properties>
+	</persistence-unit>
+
+</persistence>
