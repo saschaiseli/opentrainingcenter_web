@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd">
+
+	<changeSet author="sascha_iseli" id="2016-01-26" context="development">
+		<createTable tableName="Blabla">
+			<column name="id" type="CHAR(36)">
+				<constraints nullable="false" />
+			</column>
+			<column name="title" type="VARCHAR(255)" />
+			<column name="published" type="DATETIME" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="sascha_iseli" id="2016-01-26-2148"
+		context="development">
+		<dropTable tableName="Blabla" />
+	</changeSet>
+
+	<changeSet id="2016-01-26-2151" author="Sascha Iseli">
+		<addColumn tableName="ATHLETE">
+			<column name="password" type="VARCHAR(255)"></column>
+		</addColumn>
+	</changeSet>
+</databaseChangeLog>

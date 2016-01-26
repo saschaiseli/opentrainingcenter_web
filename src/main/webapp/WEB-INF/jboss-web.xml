@@ -1,0 +1,3 @@
+<jboss-web>
+    <security-domain>opentrainingcenter</security-domain>
+</jboss-web>

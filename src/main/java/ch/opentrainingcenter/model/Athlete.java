@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Athlete {
@@ -22,7 +24,13 @@ public class Athlete {
     @SequenceGenerator(name = "ATHLETE_ID_SEQUENCE", sequenceName = "ATHLETE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ATHLETE_ID_SEQUENCE")
     private int id;
-    private String name;
+    private String firstName;
+    private String lastName;
+    @Pattern(regexp = ".+@.+", message = "{user.email.pattern}")
+    @Column(unique = true)
+    private String email;
+    private String password;
+
     @Temporal(TemporalType.DATE)
     private Date birthday;
     private Integer maxheartrate;
@@ -42,12 +50,6 @@ public class Athlete {
     public Athlete() {
     }
 
-    public Athlete(final String name, final Date birthday, final Integer maxheartrate) {
-        this.name = name;
-        this.birthday = birthday;
-        this.maxheartrate = maxheartrate;
-    }
-
     public int getId() {
         return id;
     }
@@ -56,12 +58,20 @@ public class Athlete {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getBirthday() {
@@ -126,10 +136,25 @@ public class Athlete {
 
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
     @Override
     @SuppressWarnings("nls")
-
     public String toString() {
-        return "Athlete [id=" + id + ", name=" + name + ", birthday=" + birthday + ", maxheartrate=" + maxheartrate + "]";
+        return "Athlete [id=" + id + ", name=" + firstName + ", birthday=" + birthday + ", maxheartrate=" + maxheartrate + "]";
     }
 }

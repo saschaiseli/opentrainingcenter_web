@@ -19,7 +19,7 @@ public class Health {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HEALTH_ID_SEQUENCE")
     private int id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ID_FK_ATHLETE")
     private Athlete athlete;
 
