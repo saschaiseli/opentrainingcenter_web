@@ -5,7 +5,7 @@
 	version="2.1">
 	<persistence-unit name="primary">
 		<jta-data-source>java:jboss/datasources/otc_DS</jta-data-source>
-		
+
 		<!-- Entities -->
 		<class>ch.opentrainingcenter.model.Athlete</class>
 		<class>ch.opentrainingcenter.model.Health</class>
@@ -17,8 +17,8 @@
 		<class>ch.opentrainingcenter.model.Tracktrainingproperty</class>
 		<class>ch.opentrainingcenter.model.Training</class>
 		<class>ch.opentrainingcenter.model.Weather</class>
-		
-		<!-- Hibernate Properties --> 
+
+		<!-- Hibernate Properties -->
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
 			<property name="hibernate.show_sql" value="true" />
