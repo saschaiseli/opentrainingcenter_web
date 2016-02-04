@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title>OpenTrainingCenter</title>
 	<meta charset="utf-8" />
-	<h:outputStylesheet name="/screen.css" />
+	<h:outputStylesheet name="/screen_1.css" />
 </h:head>
 <h:body>
 	<div id="container">
-		<div id="header">
-			<p>OpenTrainingCenter</p>
-		</div>
 		<div id="content">
-			<ui:insert name="content">
+			<div id="left">left</div>
+			<div id="center">
+				<p:dialog id="blabla" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+					<h:outputText value="This is a Modal Dialog." />
+				</p:dialog>
+				<ui:insert name="content"> 
                     [Template content will be inserted here]
-            </ui:insert>
+				</ui:insert>
+			</div>
+			<div id="right">right</div>
 		</div>
 		<div id="footer">
-			<p> (C) 2016 by opentrainingcenter.ch</p>
+			<p>(C) 2016 by opentrainingcenter.ch</p>
+
 		</div>
+		<p:dock>
+			<p:menuitem value="#{msg['dock.upload']}" icon="/images/dock/ic_add_circle_black_48dp.png" onclick="PF('dlg2').show();" url="#" />
+			<p:menuitem value="#{msg['dock.export']}" icon="/images/dock/ic_cloud_upload_black_48dp.png" url="#" />
+			<p:menuitem value="#{msg['dock.addHeart']}" icon="/images/dock/ic_favorite_black_48dp.png" url="#" />
+			<p:menuitem value="#{msg['dock.sortByStrecke']}" icon="/images/dock/ic_find_in_page_black_48dp.png" url="#" />
+			<p:menuitem value="#{msg['dock.trainingsplaene']}" icon="/images/dock/ic_today_black_48dp.png" url="#" />
+			<p:menuitem value="#{msg['dock.strecken']}" icon="/images/dock/203-earth.png" url="#" />
+			<p:menuitem value="#{msg['dock.schuhe']}" icon="/images/dock/running_shoes.png" url="#" />
+			<p:menuitem value="#{msg['dock.charts']}" icon="/images/dock/ic_timeline_black_48dp.png" url="#" />
+			<p:menuitem value="#{msg['dock.userSettings']}" icon="/images/dock/ic_settings_applications_black_48dp.png" url="#" />
+			<p:menuitem value="#{msg['dock.about']}" icon="/images/dock/ic_copyright_black_48dp.png" url="#" />
+		</p:dock>
+
 	</div>
 </h:body>
 </html>

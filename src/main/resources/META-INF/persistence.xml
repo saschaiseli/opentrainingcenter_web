@@ -4,7 +4,8 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 	version="2.1">
 	<persistence-unit name="primary">
-		<jta-data-source>java:jboss/datasources/otc_DS</jta-data-source>
+		<!-- <jta-data-source>java:jboss/datasources/otc_DS</jta-data-source> -->
+		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
 		<!-- Entities -->
 		<class>ch.opentrainingcenter.model.Athlete</class>
@@ -20,7 +21,7 @@
 
 		<!-- Hibernate Properties -->
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>

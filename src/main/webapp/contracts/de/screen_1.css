@@ -1,0 +1,45 @@
+html, body {
+	background-color: #d7d4d4;
+	margin: 0;
+	padding: 0;
+	height: 100%; /* braucht es für die min-height des Containers */
+	font-family: Verdana, sans-serif;
+}
+
+div#container {
+	position: relative; /* braucht es für die Footer Position*/
+	margin: 0 auto; /* Zentriert die Seite (nicht in IE5) */
+	width: 98%;
+	height: auto !important; /* normale Browser */
+	height: 100%; /* IE6: setzt dies wie min-height um*/
+	min-height: 100%; /* normale Browser */
+}
+
+#left {
+	float: left;
+	width: 100px;
+}
+
+#center {
+	display: inline-block;
+	margin: 0 auto;
+	width: 100px;
+}
+
+#right {
+	float: right;
+	width: 100px;
+}
+
+div#footer {
+	position: absolute;
+	width: 95%;
+	bottom: 0; /* Positioniert dies ganz unten */
+	padding-right: 10;
+	margin-right: 10;
+	text-align: right;
+}
+
+h2 {
+	font-size: 1.2em;
+}
