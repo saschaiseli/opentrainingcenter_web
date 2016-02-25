@@ -4,6 +4,7 @@
 	xmlns:s="urn:security"
 	xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-ejb3-2_0.xsd http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd"
 	version="3.1" impl-version="2.0">
+	<!-- 
 	<assembly-descriptor>
 		<s:security>
 			<ejb-name>*</ejb-name>
@@ -11,4 +12,5 @@
 			<s:run-as-principal>Runner</s:run-as-principal>
 		</s:security>
 	</assembly-descriptor>
+	 -->
 </jboss:ejb-jar>

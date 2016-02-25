@@ -35,8 +35,9 @@ public class EntitiesITCase {
 
     @Deployment
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Athlete.class.getPackage()).addAsResource("META-INF/persistence.xml")
+        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Athlete.class.getPackage()).addAsResource("META-INF/test-persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+
     }
 
     @Test
