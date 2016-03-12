@@ -10,18 +10,24 @@
 	<h:outputStylesheet name="/screen_1.css" />
 	<div id="container">
 		<div id="content">
-			<div id="left"> 
+			<div id="left">
 				<h:form>
 					<h:panelGrid columnClasses="value">
-						<p:schedule value="#{calenderMenuView.lazyEventModel}" styleClass="schedule" draggable="false" resizable="false" showWeekNumbers="true" view="month" leftHeaderTemplate="today" centerTemplate="month" rightHeaderTemplate="prev,next" locale="de" />
+						<p:schedule value="#{calenderMenuView.lazyEventModel}" styleClass="schedule" draggable="false" resizable="false" showWeekNumbers="true" view="month"
+							leftHeaderTemplate="today" centerTemplate="month" rightHeaderTemplate="prev,next" locale="de" />
 					</h:panelGrid>
 				</h:form>
 				sdfsdf
 			</div>
 			<div id="center">
 				<p:dialog id="blabla" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-					<h:outputText value="This is a Modal Dialog." />
+					<h:form enctype="multipart/form-data">
+						<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false" multiple="true" update="messages" />
+						<p:growl id="messages" showDetail="true" />
+					</h:form>
 				</p:dialog>
+
+
 				<ui:insert name="content"> 
                     [Template content will be inserted here]
 				</ui:insert>
@@ -49,38 +55,38 @@
 		</p:dock>
 
 	</div>
-<script type="text/javascript">
-    PrimeFaces.locales['de'] = {
-        closeText : 'Schließen',
-        prevText : 'Zurück',
-        nextText : 'Weiter',
-        currentText : 'Start',
-        monthNames : [ 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
-                'Juli', 'August', 'September', 'Oktober', 'November',
-                'Dezember' ],
-        monthNamesShort : [ 'Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez' ],
-        dayNames : [ 'Sonntag', 'Montag', 'Dienstag', 'Mittwoch',
-                'Donnerstag', 'Freitag', 'Samstag' ],
-        dayNamesShort : [ 'Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam' ],
-        dayNamesMin : [ 'S', 'M', 'D', 'M ', 'D', 'F ', 'S' ],
-        weekHeader : 'Woche',
-        FirstDay : 1,
-        isRTL : false,
-        showMonthAfterYear : false,
-        yearSuffix : '',
-        timeOnlyTitle : 'Nur Zeit',
-        timeText : 'Zeit',
-        hourText : 'Stunde',
-        minuteText : 'Minute',
-        secondText : 'Sekunde',
-        currentText : 'now',
-        ampm : false,
-        month : 'Monat',
-        week : 'Woche',
-        day : 'Tag',
-        allDayText : 'Ganzer Tag'
-    };
-</script>
+	<script type="text/javascript">
+		PrimeFaces.locales['de'] = {
+			closeText : 'Schließen',
+			prevText : 'Zurück',
+			nextText : 'Weiter',
+			currentText : 'Start',
+			monthNames : [ 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+					'Juli', 'August', 'September', 'Oktober', 'November',
+					'Dezember' ],
+			monthNamesShort : [ 'Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+					'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez' ],
+			dayNames : [ 'Sonntag', 'Montag', 'Dienstag', 'Mittwoch',
+					'Donnerstag', 'Freitag', 'Samstag' ],
+			dayNamesShort : [ 'Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam' ],
+			dayNamesMin : [ 'S', 'M', 'D', 'M ', 'D', 'F ', 'S' ],
+			weekHeader : 'Woche',
+			FirstDay : 1,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Nur Zeit',
+			timeText : 'Zeit',
+			hourText : 'Stunde',
+			minuteText : 'Minute',
+			secondText : 'Sekunde',
+			currentText : 'now',
+			ampm : false,
+			month : 'Monat',
+			week : 'Woche',
+			day : 'Tag',
+			allDayText : 'Ganzer Tag'
+		};
+	</script>
 </h:body>
 </html>

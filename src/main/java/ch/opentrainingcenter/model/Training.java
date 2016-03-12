@@ -56,7 +56,7 @@ public class Training {
     @JoinColumn(name = "ID_FK_SHOES")
     private Shoe shoe;
 
-    @OneToMany(mappedBy = "training", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
     private List<Tracktrainingproperty> trackPoints = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,7 +66,7 @@ public class Training {
     private Integer upMeter;
     private Integer downMeter;
 
-    @OneToMany(mappedBy = "training", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
     private List<LapInfo> lapInfos = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)
