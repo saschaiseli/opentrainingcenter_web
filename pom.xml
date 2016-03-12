@@ -27,7 +27,6 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -36,7 +35,7 @@
 		<dependency>
 			<groupId>garmin.com</groupId>
 			<artifactId>fit-sdk</artifactId>
-			<version>13.10</version>
+			<version>16.60</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/fit_16.60.0.jar</systemPath>
 		</dependency>
@@ -64,6 +63,24 @@
 			<version>1.1.2.Final</version>
 			<scope>import</scope>
 			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-bom</artifactId>
+			<version>2.2.2</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

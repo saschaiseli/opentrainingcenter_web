@@ -13,14 +13,13 @@
 		<class>ch.opentrainingcenter.model.Planungwoche</class>
 		<class>ch.opentrainingcenter.model.Route</class>
 		<class>ch.opentrainingcenter.model.Shoe</class>
-		<class>ch.opentrainingcenter.model.Streckenpunkte</class>
 		<class>ch.opentrainingcenter.model.Tracktrainingproperty</class>
 		<class>ch.opentrainingcenter.model.Training</class>
 		<class>ch.opentrainingcenter.model.Weather</class>
 
 		<!-- Hibernate Properties -->
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="false" />
 		</properties>
 	</persistence-unit>

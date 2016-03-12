@@ -46,10 +46,6 @@ public final class CommonTransferFactory {
         return new Route("blabla", athlete);
     }
 
-    public static Streckenpunkte createStreckenPunkt(final double distance, final double longitude, final double latitude) {
-        return new Streckenpunkte(BigDecimal.valueOf(longitude), BigDecimal.valueOf(latitude));
-    }
-
     /**
      * @param distance
      *            vom Startweg
@@ -61,13 +57,13 @@ public final class CommonTransferFactory {
      *            absolute zeit
      * @param lap
      *            Runden nummer
-     * @param streckenPunkt
-     *            {@link IStreckenPunkt}
+     * @param longitude
+     * @param latitude
      * @return {@link ITraining}
      */
     public static Tracktrainingproperty createTrackPointProperty(final double distance, final int heartbeat, final int altitude, final long time, final int lap,
-            final Streckenpunkte streckenPunkt) {
-        return new Tracktrainingproperty(BigDecimal.valueOf(distance), heartbeat, altitude, time, lap, streckenPunkt);
+            final Double longitude, final Double latitude) {
+        return new Tracktrainingproperty(BigDecimal.valueOf(distance), heartbeat, altitude, time, lap, longitude, latitude);
     }
 
     /**

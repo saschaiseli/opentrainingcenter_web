@@ -1,6 +1,5 @@
 package ch.opentrainingcenter.service.fileconverter.fit;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import ch.opentrainingcenter.model.HeartRate;
 import ch.opentrainingcenter.model.LapInfo;
 import ch.opentrainingcenter.model.RunData;
 import ch.opentrainingcenter.model.Sport;
-import ch.opentrainingcenter.model.Streckenpunkte;
 import ch.opentrainingcenter.model.Tracktrainingproperty;
 import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.helper.DistanceHelper;
@@ -71,21 +69,20 @@ public class TrainingListener implements MesgListener {
         final double distance = record.getDistance();
         final Integer positionLong = record.getPositionLong();
         final Integer positionLat = record.getPositionLat();
-        final Streckenpunkte streckenPunkt;
+        Double longDms = null;
+        Double latDms = null;
         if (positionLong != null || positionLat != null) {
-            final BigDecimal longDms = ConvertGarminSemicircles.convertSemicircleToDms(positionLong);
-            final BigDecimal latDms = ConvertGarminSemicircles.convertSemicircleToDms(positionLat);
-            streckenPunkt = CommonTransferFactory.createStreckenPunkt(distance, longDms.doubleValue(), latDms.doubleValue());
+            longDms = ConvertGarminSemicircles.convertSemicircleToDms(positionLong);
+            latDms = ConvertGarminSemicircles.convertSemicircleToDms(positionLat);
             valid++;
         } else {
-            streckenPunkt = null;
             error++;
         }
 
         final int heartbeat = record.getHeartRate() != null ? record.getHeartRate() : -1;
         final int altitude = record.getAltitude() != null ? record.getAltitude().intValue() : -1;
         final long time = record.getTimestamp().getDate().getTime();
-        return CommonTransferFactory.createTrackPointProperty(distance, heartbeat, altitude, time, 0, streckenPunkt);
+        return CommonTransferFactory.createTrackPointProperty(distance, heartbeat, altitude, time, 0, longDms, latDms);
     }
 
     public Training getTraining() {

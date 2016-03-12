@@ -2,14 +2,12 @@ package ch.opentrainingcenter.model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -23,10 +21,8 @@ public class Tracktrainingproperty {
     private int heartbeat;
     private int altitude;
     private long zeit;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_FK_STRECKENPUNKT")
-    private Streckenpunkte streckenPunkt;
+    private Double longitude;
+    private Double latitude;
 
     @ManyToOne
     @JoinColumn(name = "ID_TRAINING")
@@ -37,14 +33,13 @@ public class Tracktrainingproperty {
     public Tracktrainingproperty() {
     }
 
-    public Tracktrainingproperty(final BigDecimal distance, final int heartbeat, final int altitude, final long zeit, final int lap,
-            final Streckenpunkte streckenPunkt) {
+    public Tracktrainingproperty(final BigDecimal distance, final int heartbeat, final int altitude, final long zeit, final int lap, final Double longitude,
+            final Double latitude) {
         this.distance = distance;
         this.heartbeat = heartbeat;
         this.altitude = altitude;
         this.zeit = zeit;
         this.lap = lap;
-        this.streckenPunkt = streckenPunkt;
     }
 
     public int getId() {
@@ -87,20 +82,28 @@ public class Tracktrainingproperty {
         this.zeit = zeit;
     }
 
-    public Streckenpunkte getStreckenPunkt() {
-        return streckenPunkt;
-    }
-
-    public void setStreckenPunkt(final Streckenpunkte streckenPunkt) {
-        this.streckenPunkt = streckenPunkt;
-    }
-
     public int getLap() {
         return lap;
     }
 
     public void setLap(final int lap) {
         this.lap = lap;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(final Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(final Double latitude) {
+        this.latitude = latitude;
     }
 
     public Training getTraining() {
@@ -112,11 +115,9 @@ public class Tracktrainingproperty {
     }
 
     @Override
-    @SuppressWarnings("nls")
-
     public String toString() {
         return "Tracktrainingproperty [id=" + id + ", distance=" + distance + ", heartbeat=" + heartbeat + ", altitude=" + altitude + ", zeit=" + zeit
-                + ", streckenPunkt=" + streckenPunkt + ", training=" + training + ", lap=" + lap + "]";
+                + ", longitude=" + longitude + ", latitude=" + latitude + ", training=" + training + ", lap=" + lap + "]";
     }
 
 }
