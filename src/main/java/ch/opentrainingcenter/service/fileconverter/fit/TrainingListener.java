@@ -23,9 +23,6 @@ import ch.opentrainingcenter.service.helper.DistanceHelper;
 @RequestScoped
 public class TrainingListener implements MesgListener {
 
-    // @Inject
-    // private Logger logger;
-
     private static final String RECORD = "record"; //$NON-NLS-1$
     private static final String SESSION = "session"; //$NON-NLS-1$
     private static final String LAP = "lap"; //$NON-NLS-1$

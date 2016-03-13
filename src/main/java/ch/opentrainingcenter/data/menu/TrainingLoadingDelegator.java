@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
-import ch.opentrainingcenter.model.Athlete;
 import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.TrainingService;
 
@@ -29,7 +28,7 @@ public class TrainingLoadingDelegator implements Serializable {
     @PostConstruct
     public void init() {
         logger.info("Load initially");
-        trainings.addAll(service.getTraining(new Athlete()));
+        // trainings.addAll(service.getTraining(new Athlete()));
         logger.info("Anzahl Trainings: " + getTrainings().size());
     }
 

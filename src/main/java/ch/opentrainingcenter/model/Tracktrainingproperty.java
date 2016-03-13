@@ -40,6 +40,8 @@ public class Tracktrainingproperty {
         this.altitude = altitude;
         this.zeit = zeit;
         this.lap = lap;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public int getId() {
