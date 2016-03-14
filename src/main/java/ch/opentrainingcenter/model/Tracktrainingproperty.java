@@ -1,7 +1,5 @@
 package ch.opentrainingcenter.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,15 +15,16 @@ public class Tracktrainingproperty {
     @SequenceGenerator(name = "TRACKPOINTPROPERTY_ID_SEQUENCE", sequenceName = "TRACKPOINTPROPERTY_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRACKPOINTPROPERTY_ID_SEQUENCE")
     private int id;
-    private BigDecimal distance;
+    private double distance;
     private int heartbeat;
     private int altitude;
     private long zeit;
     private Double longitude;
     private Double latitude;
 
+    // @JoinColumn(name = "ID_TRAINING")
     @ManyToOne
-    @JoinColumn(name = "ID_TRAINING")
+    @JoinColumn(name = "ID_TRAINING", nullable = false)
     private Training training;
 
     private int lap;
@@ -33,7 +32,7 @@ public class Tracktrainingproperty {
     public Tracktrainingproperty() {
     }
 
-    public Tracktrainingproperty(final BigDecimal distance, final int heartbeat, final int altitude, final long zeit, final int lap, final Double longitude,
+    public Tracktrainingproperty(final double distance, final int heartbeat, final int altitude, final long zeit, final int lap, final Double longitude,
             final Double latitude) {
         this.distance = distance;
         this.heartbeat = heartbeat;
@@ -52,11 +51,11 @@ public class Tracktrainingproperty {
         this.id = id;
     }
 
-    public BigDecimal getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(final BigDecimal distance) {
+    public void setDistance(final double distance) {
         this.distance = distance;
     }
 

@@ -1,6 +1,5 @@
 package ch.opentrainingcenter.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public final class CommonTransferFactory {
@@ -63,7 +62,7 @@ public final class CommonTransferFactory {
      */
     public static Tracktrainingproperty createTrackPointProperty(final double distance, final int heartbeat, final int altitude, final long time, final int lap,
             final Double longitude, final Double latitude) {
-        return new Tracktrainingproperty(BigDecimal.valueOf(distance), heartbeat, altitude, time, lap, longitude, latitude);
+        return new Tracktrainingproperty(distance, heartbeat, altitude, time, lap, longitude, latitude);
     }
 
     /**

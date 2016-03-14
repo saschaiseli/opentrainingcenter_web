@@ -1,7 +1,5 @@
 package ch.opentrainingcenter.service;
 
-import javax.persistence.EntityManager;
-
 import ch.opentrainingcenter.model.Training;
 
 public interface TrainingService {
@@ -10,7 +8,5 @@ public interface TrainingService {
 
     int doSave(Training training);
 
-    Training load(int id);
-
-    void setEm(final EntityManager em);
+    Training findFullTraining(int id);
 }

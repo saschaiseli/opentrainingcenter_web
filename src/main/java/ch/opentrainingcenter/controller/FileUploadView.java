@@ -1,5 +1,6 @@
 package ch.opentrainingcenter.controller;
 
+import javax.ejb.Asynchronous;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -31,6 +32,7 @@ public class FileUploadView {
         this.file = file;
     }
 
+    @Asynchronous
     public void handleFileUpload(final FileUploadEvent event) {
         FacesMessage message = null;
         try {

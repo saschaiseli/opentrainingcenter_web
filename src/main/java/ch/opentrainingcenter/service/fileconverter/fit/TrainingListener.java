@@ -95,6 +95,9 @@ public class TrainingListener implements MesgListener {
         final Training training = CommonTransferFactory.createTraining(runData, heart);
         training.setDatum(dateOfStart);
         training.setTrackPoints(trackpoints);
+        for (final Tracktrainingproperty tt : trackpoints) {
+            tt.setTraining(training);
+        }
         training.setDownMeter(session.getTotalDescent() != null ? session.getTotalDescent() : 0);
         training.setUpMeter(session.getTotalAscent() != null ? session.getTotalAscent() : 0);
         final com.garmin.fit.Sport sport = session.getSport();
@@ -110,6 +113,9 @@ public class TrainingListener implements MesgListener {
             training.setTrainingEffect((int) (10 * totalTrainingEffect.floatValue()));
         }
         training.setLapInfos(lapInfos);
+        for (final LapInfo lapInfo : lapInfos) {
+            lapInfo.setTraining(training);
+        }
         final int total = error + valid;
         final int fehlerInProzent = (int) (100 * (error / (float) total));
         training.setGeoQuality(fehlerInProzent);

@@ -103,18 +103,19 @@ public class ConvertFitEJBTest {
 
         final List<Tracktrainingproperty> points = training.getTrackPoints();
 
-        assertTrackPoint(0, "2014-09-11 19:18:35", 0.0, 558.0, 46.95485311, 7.449236233, points.get(0));
-        assertTrackPoint(1, "2014-09-11 19:18:43", 12.57, 555.0, 46.95496534, 7.449198263, points.get(1));
-        assertTrackPoint(2, "2014-09-11 19:18:48", 31.83, 555.0, 46.95501345, 7.448971029, points.get(2));
-        assertTrackPoint(3, "2014-09-11 19:18:52", 45.68, 554.0, 46.95496056, 7.448805906, points.get(3));
-        assertTrackPoint(4, "2014-09-11 19:18:55", 51.47, 554.0, 46.95492133, 7.448757458, points.get(4));
+        assertTrackPoint(0, "2014-09-11 19:18:35", 0.0, 558.0, 46.95485311, 7.449236233, points.get(0), training);
+        assertTrackPoint(1, "2014-09-11 19:18:43", 12.57, 555.0, 46.95496534, 7.449198263, points.get(1), training);
+        assertTrackPoint(2, "2014-09-11 19:18:48", 31.83, 555.0, 46.95501345, 7.448971029, points.get(2), training);
+        assertTrackPoint(3, "2014-09-11 19:18:52", 45.68, 554.0, 46.95496056, 7.448805906, points.get(3), training);
+        assertTrackPoint(4, "2014-09-11 19:18:55", 51.47, 554.0, 46.95492133, 7.448757458, points.get(4), training);
         // noch letzter punkt
-        assertTrackPoint(301, "2014-09-11 19:51:57", 5294.86, 562.0, 46.9547371, 7.448976813, points.get(points.size() - 1));
+        assertTrackPoint(301, "2014-09-11 19:51:57", 5294.86, 562.0, 46.9547371, 7.448976813, points.get(points.size() - 1), training);
 
         final List<LapInfo> lapInfos = training.getLapInfos();
         assertEquals(1, lapInfos.size());
         final LapInfo lap = lapInfos.get(0);
         assertEquals(0, lap.getStart());
+        assertEquals(training, lap.getTraining());
         assertEquals((int) training.getLaengeInMeter(), lap.getEnd());
         assertEquals(2003000, lap.getTime());
         assertEquals(132, lap.getHeartBeat());
@@ -124,15 +125,16 @@ public class ConvertFitEJBTest {
     }
 
     private void assertTrackPoint(final int index, final String datum, final double distanz, final double hoehe, final double latitude, final double longitude,
-            final Tracktrainingproperty point) throws ParseException {
+            final Tracktrainingproperty point, final Training training) throws ParseException {
         final String punkt = "[Punkt " + index + "] ";
         final long time = convertToDate(datum);
         final long convertedTime = point.getZeit();
-        assertEquals(punkt + "Distanz vom Punkt", distanz, point.getDistance().doubleValue(), 0.001);
+        assertEquals(punkt + "Distanz vom Punkt", distanz, point.getDistance(), 0.001);
         assertEquals(punkt + "Differenz muss 0 [ms] sein", 0, convertedTime - time);
         assertEquals(punkt + "Höhe des Punktes", hoehe, point.getAltitude(), 0.001);
         assertEquals(punkt + "LatitudeDegrees", latitude, point.getLatitude(), 0.00000001);
         assertEquals(punkt + "LongitudeDegrees", longitude, point.getLongitude(), 0.00000001);
+        assertEquals("Training muss gesetzt sein: ", training, point.getTraining());
     }
 
     private long convertToDate(final String datum) throws ParseException {

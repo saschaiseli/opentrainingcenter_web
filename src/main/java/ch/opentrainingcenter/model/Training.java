@@ -11,17 +11,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+//JOIN FETCH t.trackPoints
+@NamedQuery(name = "Training.findTrainingWithTrackPoints", query = "Select t from Training t JOIN FETCH t.trackPoints WHERE t.id=:id")
 @Entity
 public class Training {
     @Id
@@ -56,7 +60,7 @@ public class Training {
     @JoinColumn(name = "ID_FK_SHOES")
     private Shoe shoe;
 
-    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "training", fetch = FetchType.LAZY)
     private List<Tracktrainingproperty> trackPoints = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -66,7 +70,7 @@ public class Training {
     private Integer upMeter;
     private Integer downMeter;
 
-    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LapInfo> lapInfos = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)
