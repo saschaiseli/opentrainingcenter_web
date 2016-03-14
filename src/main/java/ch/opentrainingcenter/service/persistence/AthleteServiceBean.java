@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.service.impl;
+package ch.opentrainingcenter.service.persistence;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

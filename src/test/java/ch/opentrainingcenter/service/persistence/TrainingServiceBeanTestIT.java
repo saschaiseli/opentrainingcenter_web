@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.service.impl;
+package ch.opentrainingcenter.service.persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -30,6 +30,7 @@ import ch.opentrainingcenter.service.fileconverter.fit.ConvertFitEJB;
 import ch.opentrainingcenter.service.fileconverter.fit.ConvertGarminSemicircles;
 import ch.opentrainingcenter.service.fileconverter.fit.TrainingListener;
 import ch.opentrainingcenter.service.helper.DistanceHelper;
+import ch.opentrainingcenter.service.persistence.TrainingServiceBean;
 
 @RunWith(Arquillian.class)
 public class TrainingServiceBeanTestIT {

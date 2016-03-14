@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.service.impl;
+package ch.opentrainingcenter.service.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
