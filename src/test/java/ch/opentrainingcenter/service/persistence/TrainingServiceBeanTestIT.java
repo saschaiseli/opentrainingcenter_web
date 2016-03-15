@@ -1,6 +1,7 @@
 package ch.opentrainingcenter.service.persistence;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -22,15 +23,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ch.opentrainingcenter.model.Athlete;
+import ch.opentrainingcenter.model.CommonTransferFactory;
 import ch.opentrainingcenter.model.LapInfo;
 import ch.opentrainingcenter.model.Tracktrainingproperty;
 import ch.opentrainingcenter.model.Training;
+import ch.opentrainingcenter.service.AthleteService;
 import ch.opentrainingcenter.service.TrainingService;
 import ch.opentrainingcenter.service.fileconverter.fit.ConvertFitEJB;
 import ch.opentrainingcenter.service.fileconverter.fit.ConvertGarminSemicircles;
 import ch.opentrainingcenter.service.fileconverter.fit.TrainingListener;
 import ch.opentrainingcenter.service.helper.DistanceHelper;
-import ch.opentrainingcenter.service.persistence.TrainingServiceBean;
 
 @RunWith(Arquillian.class)
 public class TrainingServiceBeanTestIT {
@@ -41,14 +44,18 @@ public class TrainingServiceBeanTestIT {
 
     @Inject
     private TrainingService trainingService;
+    @Inject
+    AthleteService athleteService;
+
     private Training training;
+    private Athlete athlete;
 
     @Deployment
     public static WebArchive createDeployment() {
         final File garminFitFile = new File("src/main/webapp/WEB-INF/lib", "fit_16.60.0.jar");
-        final WebArchive archive = ShrinkWrap.create(WebArchive.class).addClasses(TrainingService.class, TrainingServiceBean.class, DistanceHelper.class,
-                ConvertGarminSemicircles.class, ConvertFitEJB.class, TrainingListener.class).addPackage(Training.class.getPackage()).addAsLibraries(
-                        garminFitFile).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+        final WebArchive archive = ShrinkWrap.create(WebArchive.class).addClasses(AthleteService.class, AthleteServiceBean.class, TrainingService.class,
+                TrainingServiceBean.class, DistanceHelper.class, ConvertGarminSemicircles.class, ConvertFitEJB.class, TrainingListener.class).addPackage(
+                        Training.class.getPackage()).addAsLibraries(garminFitFile).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         archive.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
 
         final MavenResolverSystem resolver = Maven.resolver();
@@ -60,6 +67,10 @@ public class TrainingServiceBeanTestIT {
     @Before
     public void setUp() throws FileNotFoundException {
         training = service.convert(new FileInputStream(new File(FOLDER, "2014_09_11.fit")));
+        athlete = CommonTransferFactory.createAthlete("firstName", "lastName", "mail@opentrainingceter.ch", "password");
+        athleteService.doSave(athlete);
+
+        training.setAthlete(athlete);
     }
 
     @Test
@@ -71,6 +82,7 @@ public class TrainingServiceBeanTestIT {
 
         assertPoints(training.getTrackPoints(), trainingFromDb.getTrackPoints());
         assertLaps(training.getLapInfos(), trainingFromDb.getLapInfos());
+        assertNotNull(training.getAthlete());
     }
 
     private void assertLaps(final List<LapInfo> expectedLap, final List<LapInfo> dbLap) {

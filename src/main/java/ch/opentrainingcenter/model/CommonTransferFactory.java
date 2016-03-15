@@ -41,10 +41,6 @@ public final class CommonTransferFactory {
         return new Route(name, beschreibung, referenzTraining);
     }
 
-    public static Route createDefaultRoute(final Athlete athlete) {
-        return new Route("blabla", athlete);
-    }
-
     /**
      * @param distance
      *            vom Startweg
@@ -101,6 +97,10 @@ public final class CommonTransferFactory {
 
     public static Shoe createSchuh(final Athlete athlete, final String schuhName, final String image, final int preis, final Date kaufdatum) {
         return new Shoe(athlete, schuhName, image, preis, kaufdatum);
+    }
+
+    public static Athlete createAthlete(final String firstName, final String lastName, final String email, final String password) {
+        return new Athlete(firstName, lastName, email, password);
     }
 
 }

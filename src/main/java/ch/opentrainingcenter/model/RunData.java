@@ -6,8 +6,8 @@ package ch.opentrainingcenter.model;
 public class RunData {
 
     private final long dateOfStart;
-    private final double timeInSeconds;
-    private final double distanceInMeter;
+    private final long timeInSeconds;
+    private final long distanceInMeter;
     private final double maxSpeed;
 
     /**
@@ -19,7 +19,7 @@ public class RunData {
      *            Distanz in meter
      * @param maxSpeed
      */
-    public RunData(final long dateOfStart, final double timeInSeconds, final double distanceInMeter, final double maxSpeed) {
+    public RunData(final long dateOfStart, final long timeInSeconds, final long distanceInMeter, final double maxSpeed) {
         this.dateOfStart = dateOfStart;
         this.timeInSeconds = timeInSeconds;
         this.distanceInMeter = distanceInMeter;
@@ -36,14 +36,14 @@ public class RunData {
     /**
      * @return Dauer des Laufes in Sekunden
      */
-    public double getTimeInSeconds() {
+    public long getTimeInSeconds() {
         return timeInSeconds;
     }
 
     /**
      * @return Distanz in meter
      */
-    public double getDistanceInMeter() {
+    public long getDistanceInMeter() {
         return distanceInMeter;
     }
 

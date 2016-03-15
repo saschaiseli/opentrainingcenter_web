@@ -1,6 +1,5 @@
 package ch.opentrainingcenter.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -17,15 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//JOIN FETCH t.trackPoints
-@NamedQuery(name = "Training.findTrainingWithTrackPoints", query = "Select t from Training t JOIN FETCH t.trackPoints WHERE t.id=:id")
 @Entity
 public class Training {
     @Id
@@ -36,16 +32,16 @@ public class Training {
 
     private long datum;
 
-    private BigDecimal dauer;
-    private BigDecimal laengeInMeter;
+    private long dauer;
+    private long laengeInMeter;
     private int averageHeartBeat;
     private int maxHeartBeat;
-    private BigDecimal maxSpeed;
+    private double maxSpeed;
 
     private String note;
 
     @ManyToOne
-    @JoinColumn(name = "ID_FK_ATHLETE")
+    @JoinColumn(name = "ID_FK_ATHLETE", nullable = false)
     private Athlete athlete;
 
     @OneToOne
@@ -88,16 +84,16 @@ public class Training {
     public Training() {
     }
 
-    public Training(final RunData runData, final HeartRate heart, final String note, final Weather weather, final Route route) {
+    public Training(final RunData runData, final HeartRate heart, final String remark, final Weather wetter, final Route strecke) {
         datum = runData.getDateOfStart();
-        dauer = BigDecimal.valueOf(runData.getTimeInSeconds());
-        laengeInMeter = BigDecimal.valueOf(runData.getDistanceInMeter());
+        dauer = runData.getTimeInSeconds();
+        laengeInMeter = runData.getDistanceInMeter();
         averageHeartBeat = heart.getAverage();
         maxHeartBeat = heart.getMax();
-        maxSpeed = BigDecimal.valueOf(runData.getMaxSpeed());
-        this.note = note;
-        this.weather = weather;
-        this.route = route;
+        maxSpeed = runData.getMaxSpeed();
+        note = remark;
+        weather = wetter;
+        route = strecke;
     }
 
     public int getId() {
@@ -148,44 +144,44 @@ public class Training {
         this.datum = datum;
     }
 
-    public double getDauer() {
-        return dauer.doubleValue();
+    public long getDauer() {
+        return dauer;
     }
 
-    public void setDauer(final double dauer) {
-        this.dauer = BigDecimal.valueOf(dauer);
+    public void setDauer(final long dauer) {
+        this.dauer = dauer;
     }
 
-    public double getLaengeInMeter() {
-        return laengeInMeter.doubleValue();
+    public long getLaengeInMeter() {
+        return laengeInMeter;
     }
 
-    public void setLaengeInMeter(final double laengeinmeter) {
-        laengeInMeter = BigDecimal.valueOf(laengeinmeter);
+    public void setLaengeInMeter(final long laengeInMeter) {
+        this.laengeInMeter = laengeInMeter;
     }
 
     public int getAverageHeartBeat() {
         return averageHeartBeat;
     }
 
-    public void setAverageHeartBeat(final int averageheartbeat) {
-        averageHeartBeat = averageheartbeat;
+    public void setAverageHeartBeat(final int averageHeartBeat) {
+        this.averageHeartBeat = averageHeartBeat;
     }
 
     public int getMaxHeartBeat() {
         return maxHeartBeat;
     }
 
-    public void setMaxHeartBeat(final int maxheartbeat) {
-        maxHeartBeat = maxheartbeat;
+    public void setMaxHeartBeat(final int maxHeartBeat) {
+        this.maxHeartBeat = maxHeartBeat;
     }
 
     public double getMaxSpeed() {
-        return maxSpeed.doubleValue();
+        return maxSpeed;
     }
 
-    public void setMaxSpeed(final double maxspeed) {
-        maxSpeed = BigDecimal.valueOf(maxspeed);
+    public void setMaxSpeed(final double maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 
     public String getNote() {

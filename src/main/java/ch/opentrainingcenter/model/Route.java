@@ -1,5 +1,6 @@
 package ch.opentrainingcenter.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,28 +17,25 @@ public class Route {
     @SequenceGenerator(name = "ROUTE_ID_SEQUENCE", sequenceName = "ROUTE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROUTE_ID_SEQUENCE")
     private int id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String beschreibung;
 
     @ManyToOne
-    @JoinColumn(name = "ID_FK_ATHLETE")
+    @JoinColumn(name = "ID_FK_ATHLETE", nullable = false)
     private Athlete athlete;
 
     @OneToOne
-    @JoinColumn(name = "ID_FK_TRAINING")
+    @JoinColumn(name = "ID_FK_TRAINING", nullable = false)
     private Training referenzTrack;
 
     public Route() {
     }
 
-    public Route(final String name, final Athlete athlete) {
-        this.name = name;
-        this.athlete = athlete;
-    }
-
-    public Route(final String name, final String beschreibung, final Training referenzTraining) {
-        this.name = name;
-        this.beschreibung = beschreibung;
+    public Route(final String routenName, final String routenBeschreibung, final Training referenzTraining) {
+        name = routenName;
+        beschreibung = routenBeschreibung;
         athlete = referenzTraining.getAthlete();
         referenzTrack = referenzTraining;
     }
@@ -83,8 +81,6 @@ public class Route {
     }
 
     @Override
-    @SuppressWarnings("nls")
-
     public String toString() {
         return "Route [name=" + name + ", beschreibung=" + beschreibung + ", athlete=" + athlete + "]";
     }

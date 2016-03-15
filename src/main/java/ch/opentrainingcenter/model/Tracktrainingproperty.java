@@ -22,7 +22,6 @@ public class Tracktrainingproperty {
     private Double longitude;
     private Double latitude;
 
-    // @JoinColumn(name = "ID_TRAINING")
     @ManyToOne
     @JoinColumn(name = "ID_TRAINING", nullable = false)
     private Training training;

@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 @Dependent
 public class Resources {
     @Produces
-    @PersistenceContext
+    @PersistenceContext(unitName = "otc")
     private EntityManager em;
 
     @Produces

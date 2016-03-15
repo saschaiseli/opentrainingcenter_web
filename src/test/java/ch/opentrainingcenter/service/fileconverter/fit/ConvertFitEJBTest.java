@@ -90,8 +90,8 @@ public class ConvertFitEJBTest {
         assertNotNull(training);
         assertNull("Ist null, da dieser Timestamp erst vom importer gesetzt", training.getDateOfImport());
         assertEquals("Lauf startet um 2014-09-11 19:18:35", convertToDate("2014-09-11 19:18:35"), training.getDatum());
-        assertEquals("<TotalTimeSeconds>2003.2</TotalTimeSeconds>", 2008.0, training.getDauer(), 0.001);
-        assertEquals("<DistanceMeters>5297.08</DistanceMeters>", 5297.08, training.getLaengeInMeter(), 0.001);
+        assertEquals("<TotalTimeSeconds>2003.2</TotalTimeSeconds>", 2008, training.getDauer());
+        assertEquals("<DistanceMeters>5297.08</DistanceMeters>", 5297, training.getLaengeInMeter());
         assertEquals("<MaximumSpeed>5.067</MaximumSpeed>", 5.067, training.getMaxSpeed(), 0.001);
         assertEquals("AverageHeartRateBpm", 132, training.getAverageHeartBeat());
         assertEquals("MaximumHeartRateBpm", 159, training.getMaxHeartBeat());

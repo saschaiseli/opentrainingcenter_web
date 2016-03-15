@@ -1,6 +1,5 @@
 package ch.opentrainingcenter.model;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,21 +23,27 @@ public class Athlete {
     @SequenceGenerator(name = "ATHLETE_ID_SEQUENCE", sequenceName = "ATHLETE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ATHLETE_ID_SEQUENCE")
     private int id;
+
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
     @Pattern(regexp = ".+@.+", message = "{user.email.pattern}")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
 
     @Temporal(TemporalType.DATE)
     private Date birthday;
-    private Integer maxheartrate;
+
+    @Column(nullable = true)
+    private int maxheartrate;
 
     @OneToMany(mappedBy = "athlete", cascade = CascadeType.REMOVE)
     private Set<Route> routes = new HashSet<>();
 
-    @OneToMany(mappedBy = "athlete", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "athlete", cascade = CascadeType.ALL)
     private Set<Health> healths = new HashSet<>();
 
     @OneToMany(mappedBy = "athlete", cascade = CascadeType.REMOVE)
@@ -48,6 +53,13 @@ public class Athlete {
     private Set<Planungwoche> planungwoches = new HashSet<>();
 
     public Athlete() {
+    }
+
+    public Athlete(final String firstName, final String lastName, final String email, final String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
@@ -110,11 +122,11 @@ public class Athlete {
         trainings.add(record);
     }
 
-    public Integer getMaxHeartRate() {
+    public int getMaxHeartRate() {
         return maxheartrate;
     }
 
-    public void setMaxHeartRate(final Integer maxHeartRate) {
+    public void setMaxHeartRate(final int maxHeartRate) {
         maxheartrate = maxHeartRate;
 
     }
@@ -128,7 +140,7 @@ public class Athlete {
     }
 
     public Set<Training> getTrainings() {
-        return Collections.emptySet();
+        return trainings;
     }
 
     public void setTrainings(final Set<Training> trainings) {
