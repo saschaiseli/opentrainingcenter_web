@@ -30,6 +30,7 @@ import ch.opentrainingcenter.model.Athlete;
 import ch.opentrainingcenter.model.CommonTransferFactory;
 import ch.opentrainingcenter.model.Health;
 import ch.opentrainingcenter.service.AthleteService;
+import ch.opentrainingcenter.service.RepositoryService;
 
 @RunWith(Arquillian.class)
 public class AthleteServiceBeanTestIT {
@@ -43,8 +44,8 @@ public class AthleteServiceBeanTestIT {
 
     @Deployment
     public static WebArchive createDeployment() {
-        final WebArchive archive = ShrinkWrap.create(WebArchive.class).addClasses(AthleteService.class, AthleteServiceBean.class).addPackage(Athlete.class
-                .getPackage()).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+        final WebArchive archive = ShrinkWrap.create(WebArchive.class).addClasses(RepositoryService.class, RepositoryServiceBean.class, AthleteService.class,
+                AthleteServiceBean.class).addPackage(Athlete.class.getPackage()).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         archive.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
 
         final MavenResolverSystem resolver = Maven.resolver();
@@ -62,14 +63,14 @@ public class AthleteServiceBeanTestIT {
 
     @After
     public void tearDown() {
-        athleteService.remove(athlete);
+        athleteService.remove(Athlete.class, athlete.getId());
     }
 
     @Test
     public void testFindAthlete() {
         assertTrue("DB ID must be greater than 0", athlete.getId() > 0);
 
-        final Athlete athleteFromDb = athleteService.find(athlete.getId());
+        final Athlete athleteFromDb = athleteService.find(Athlete.class, athlete.getId());
         assertEquals("FirstName", athlete.getFirstName(), athleteFromDb.getFirstName());
         assertEquals("LastName", athlete.getLastName(), athleteFromDb.getLastName());
         assertEquals("Email", athlete.getEmail(), athleteFromDb.getEmail());
@@ -77,7 +78,7 @@ public class AthleteServiceBeanTestIT {
 
     @Test
     public void testFindAthlete_notFound() {
-        final Athlete athleteFromDb = athleteService.find(Integer.MAX_VALUE);
+        final Athlete athleteFromDb = athleteService.find(Athlete.class, Integer.MAX_VALUE);
 
         assertNull(athleteFromDb);
     }
@@ -115,7 +116,7 @@ public class AthleteServiceBeanTestIT {
 
         assertEquals(195, updated.getMaxHeartRate());
 
-        assertNull(athleteService.find(42));
-        assertNotNull(athleteService.find(updated.getId()));
+        assertNull(athleteService.find(Athlete.class, 42));
+        assertNotNull(athleteService.find(Athlete.class, updated.getId()));
     }
 }

@@ -22,7 +22,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+@Entity(name = "TRAINING")
 public class Training {
     @Id
     @SequenceGenerator(name = "TRAINING_ID_SEQUENCE", sequenceName = "TRAINING_ID_SEQUENCE")

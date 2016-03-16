@@ -52,6 +52,9 @@ public class Athlete {
     @OneToMany(mappedBy = "athlete", cascade = CascadeType.REMOVE)
     private Set<Planungwoche> planungwoches = new HashSet<>();
 
+    @OneToMany(mappedBy = "athlete", cascade = CascadeType.REMOVE)
+    private Set<Shoe> shoes = new HashSet<>();
+
     public Athlete() {
     }
 
@@ -164,9 +167,18 @@ public class Athlete {
         this.password = password;
     }
 
+    public Set<Shoe> getShoes() {
+        return shoes;
+    }
+
+    public void setShoes(final Set<Shoe> shoes) {
+        this.shoes = shoes;
+    }
+
     @Override
     @SuppressWarnings("nls")
     public String toString() {
         return "Athlete [id=" + id + ", name=" + firstName + ", birthday=" + birthday + ", maxheartrate=" + maxheartrate + "]";
     }
+
 }

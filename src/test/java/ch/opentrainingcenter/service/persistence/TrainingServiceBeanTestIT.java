@@ -19,6 +19,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
 import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import ch.opentrainingcenter.model.LapInfo;
 import ch.opentrainingcenter.model.Tracktrainingproperty;
 import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.AthleteService;
+import ch.opentrainingcenter.service.RepositoryService;
 import ch.opentrainingcenter.service.TrainingService;
 import ch.opentrainingcenter.service.fileconverter.fit.ConvertFitEJB;
 import ch.opentrainingcenter.service.fileconverter.fit.ConvertGarminSemicircles;
@@ -53,9 +55,10 @@ public class TrainingServiceBeanTestIT {
     @Deployment
     public static WebArchive createDeployment() {
         final File garminFitFile = new File("src/main/webapp/WEB-INF/lib", "fit_16.60.0.jar");
-        final WebArchive archive = ShrinkWrap.create(WebArchive.class).addClasses(AthleteService.class, AthleteServiceBean.class, TrainingService.class,
-                TrainingServiceBean.class, DistanceHelper.class, ConvertGarminSemicircles.class, ConvertFitEJB.class, TrainingListener.class).addPackage(
-                        Training.class.getPackage()).addAsLibraries(garminFitFile).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+        final WebArchive archive = ShrinkWrap.create(WebArchive.class).addClasses(RepositoryService.class, RepositoryServiceBean.class, AthleteService.class,
+                AthleteServiceBean.class, TrainingService.class, TrainingServiceBean.class, DistanceHelper.class, ConvertGarminSemicircles.class,
+                ConvertFitEJB.class, TrainingListener.class).addPackage(Training.class.getPackage()).addAsLibraries(garminFitFile).addAsManifestResource(
+                        EmptyAsset.INSTANCE, "beans.xml");
         archive.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
 
         final MavenResolverSystem resolver = Maven.resolver();
@@ -73,16 +76,31 @@ public class TrainingServiceBeanTestIT {
         training.setAthlete(athlete);
     }
 
-    @Test
-    public void testReadWrite() throws FileNotFoundException {
-        final int id = trainingService.doSave(training);
-        assertTrue("ID must be greater than 0", id > 0);
+    @After
+    public void tearDown() {
+        athleteService.remove(Athlete.class, athlete.getId());
+    }
 
-        final Training trainingFromDb = trainingService.findFullTraining(id);
+    @Test
+    public void testReadWriteTraining() throws FileNotFoundException {
+        training = trainingService.doSave(training);
+        assertTrue("ID must be greater than 0", training.getId() > 0);
+
+        final Training trainingFromDb = trainingService.find(Training.class, training.getId());
+
+        assertNotNull(trainingFromDb.getAthlete());
+    }
+
+    @Test
+    public void testReadWriteFullTraining() throws FileNotFoundException {
+        training = trainingService.doSave(training);
+        assertTrue("ID must be greater than 0", training.getId() > 0);
+
+        final Training trainingFromDb = trainingService.findFullTraining(training.getId());
 
         assertPoints(training.getTrackPoints(), trainingFromDb.getTrackPoints());
         assertLaps(training.getLapInfos(), trainingFromDb.getLapInfos());
-        assertNotNull(training.getAthlete());
+        assertNotNull(trainingFromDb.getAthlete());
     }
 
     private void assertLaps(final List<LapInfo> expectedLap, final List<LapInfo> dbLap) {

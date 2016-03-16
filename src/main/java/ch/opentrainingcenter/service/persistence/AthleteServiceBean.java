@@ -8,31 +8,9 @@ import ch.opentrainingcenter.model.Athlete;
 import ch.opentrainingcenter.service.AthleteService;
 
 @Stateless
-public class AthleteServiceBean implements AthleteService {
+public class AthleteServiceBean extends RepositoryServiceBean<Athlete> implements AthleteService {
 
     @PersistenceContext(unitName = "otc")
     private EntityManager entityManager;
-
-    @Override
-    public Athlete doSave(final Athlete athlete) {
-        entityManager.persist(athlete);
-        return athlete;
-    }
-
-    @Override
-    public Athlete find(final int id) {
-        return entityManager.find(Athlete.class, id);
-    }
-
-    @Override
-    public Athlete update(final Athlete athlete) {
-        return entityManager.merge(athlete);
-    }
-
-    @Override
-    public void remove(final Athlete athlete) {
-        final Athlete managed = find(athlete.getId());
-        entityManager.remove(managed);
-    }
 
 }

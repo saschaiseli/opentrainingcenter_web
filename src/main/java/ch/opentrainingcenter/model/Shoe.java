@@ -2,15 +2,22 @@ package ch.opentrainingcenter.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+@NamedQueries({ //
+        @NamedQuery(name = "Shoe.getShoesByAthlete", query = "SELECT s FROM SHOES s where s.athlete=:athlete"),
+        @NamedQuery(name = "Shoe.getKilometers", query = "SELECT SUM(t.laengeInMeter) FROM TRAINING t where t.shoe=:shoe") })
 
 @Entity(name = "SHOES")
 public class Shoe {
@@ -19,6 +26,7 @@ public class Shoe {
     @SequenceGenerator(name = "SHOE_ID_SEQUENCE", sequenceName = "SHOE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SHOE_ID_SEQUENCE")
     private int id;
+    @Column(nullable = false)
     private String schuhname;
     private String imageicon;
     private int preis;
@@ -27,18 +35,10 @@ public class Shoe {
     private Date kaufdatum;
 
     @ManyToOne
-    @JoinColumn(name = "ID_FK_ATHLETE")
+    @JoinColumn(name = "ID_FK_ATHLETE", nullable = false)
     private Athlete athlete;
 
     public Shoe() {
-    }
-
-    public Shoe(final Athlete athlete, final String schuhname, final String imageicon, final int preis, final Date kaufdatum) {
-        this.athlete = athlete;
-        this.schuhname = schuhname;
-        this.imageicon = imageicon;
-        this.preis = preis;
-        this.kaufdatum = kaufdatum;
     }
 
     public int getId() {

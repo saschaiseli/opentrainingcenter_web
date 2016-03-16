@@ -95,8 +95,14 @@ public final class CommonTransferFactory {
         return new LapInfo(lap, start, end, time, heartBeat, pace, geschwindigkeit);
     }
 
-    public static Shoe createSchuh(final Athlete athlete, final String schuhName, final String image, final int preis, final Date kaufdatum) {
-        return new Shoe(athlete, schuhName, image, preis, kaufdatum);
+    public static Shoe createShoe(final Athlete athlete, final String shoeName, final String image, final int preis, final Date date) {
+        final Shoe shoe = new Shoe();
+        shoe.setAthlete(athlete);
+        shoe.setSchuhname(shoeName);
+        shoe.setImageicon(image);
+        shoe.setPreis(preis);
+        shoe.setKaufdatum(date);
+        return shoe;
     }
 
     public static Athlete createAthlete(final String firstName, final String lastName, final String email, final String password) {

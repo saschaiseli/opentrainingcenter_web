@@ -18,7 +18,7 @@ import ch.opentrainingcenter.model.Weather;
 import ch.opentrainingcenter.service.TrainingService;
 
 @Stateless
-public class TrainingServiceBean implements TrainingService {
+public class TrainingServiceBean extends RepositoryServiceBean<Training> implements TrainingService {
 
     @PersistenceContext(unitName = "otc")
     private EntityManager entityManager;
@@ -32,12 +32,6 @@ public class TrainingServiceBean implements TrainingService {
         final Route route = null;
         trainings.add(new Training(runData, heart, "note", weather, route));
         return trainings;
-    }
-
-    @Override
-    public int doSave(final Training training) {
-        entityManager.persist(training);
-        return training.getId();
     }
 
     @Override
