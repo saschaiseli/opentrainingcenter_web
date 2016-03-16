@@ -7,8 +7,8 @@
 
 	<container qualifier="wildfly" default="true">
 		<configuration>
-			<property name="jbossHome">/home/celita/bin/wildfly-8.1.0.Final</property>
-			<property name="modulePath">/home/celita/bin/wildfly-8.1.0.Final/modules</property>
+			<property name="jbossHome">target/wildfly-8.1.0.Final</property>
+			<property name="modulePath">target/wildfly-8.1.0.Final/modules</property>
 		</configuration>
 	</container>
 
