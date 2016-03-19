@@ -52,6 +52,7 @@ public class TrainingServiceBeanTestIT {
     private Athlete athlete;
     private Training training1;
     private Training training2;
+    private Athlete otherAthlete;
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -76,6 +77,9 @@ public class TrainingServiceBeanTestIT {
         athlete = CommonTransferFactory.createAthlete("firstName", "lastName", "mail@opentrainingceter.ch", "password");
         athleteService.doSave(athlete);
 
+        otherAthlete = CommonTransferFactory.createAthlete("firstName2", "lastName2", "mail2@opentrainingceter.ch", "password");
+        athleteService.doSave(otherAthlete);
+
         training1.setAthlete(athlete);
         training2.setAthlete(athlete);
 
@@ -86,6 +90,7 @@ public class TrainingServiceBeanTestIT {
     @After
     public void tearDown() {
         athleteService.remove(Athlete.class, athlete.getId());
+        athleteService.remove(Athlete.class, otherAthlete.getId());
     }
 
     @Test
@@ -98,12 +103,21 @@ public class TrainingServiceBeanTestIT {
     }
 
     @Test
-    public void testFindTrainingByAthlete() throws FileNotFoundException {
-        assertTrue("ID must be greater than 0", training1.getId() > 0);
+    public void testFindTrainingByAthlete_found() throws FileNotFoundException {
 
         final List<Training> trainings = trainingService.findTrainingByAthlete(athlete);
 
         assertEquals(2, trainings.size());
+
+        assertTrue("First Training must be first element", trainings.get(0).getDatum() > trainings.get(1).getDatum());
+    }
+
+    @Test
+    public void testFindTrainingByAthlete_not_found() throws FileNotFoundException {
+
+        final List<Training> trainings = trainingService.findTrainingByAthlete(otherAthlete);
+
+        assertEquals(0, trainings.size());
     }
 
     @Test
