@@ -49,8 +49,9 @@ public class TrainingServiceBeanTestIT {
     @Inject
     AthleteService athleteService;
 
-    private Training training;
     private Athlete athlete;
+    private Training training1;
+    private Training training2;
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -69,11 +70,17 @@ public class TrainingServiceBeanTestIT {
 
     @Before
     public void setUp() throws FileNotFoundException {
-        training = service.convert(new FileInputStream(new File(FOLDER, "2014_09_11.fit")));
+        training1 = service.convert(new FileInputStream(new File(FOLDER, "2014_09_11.fit")));
+        training2 = service.convert(new FileInputStream(new File(FOLDER, "2014_09_09.fit")));
+
         athlete = CommonTransferFactory.createAthlete("firstName", "lastName", "mail@opentrainingceter.ch", "password");
         athleteService.doSave(athlete);
 
-        training.setAthlete(athlete);
+        training1.setAthlete(athlete);
+        training2.setAthlete(athlete);
+
+        training1 = trainingService.doSave(training1);
+        training2 = trainingService.doSave(training2);
     }
 
     @After
@@ -83,23 +90,30 @@ public class TrainingServiceBeanTestIT {
 
     @Test
     public void testReadWriteTraining() throws FileNotFoundException {
-        training = trainingService.doSave(training);
-        assertTrue("ID must be greater than 0", training.getId() > 0);
+        assertTrue("ID must be greater than 0", training1.getId() > 0);
 
-        final Training trainingFromDb = trainingService.find(Training.class, training.getId());
+        final Training trainingFromDb = trainingService.find(Training.class, training1.getId());
 
         assertNotNull(trainingFromDb.getAthlete());
     }
 
     @Test
+    public void testFindTrainingByAthlete() throws FileNotFoundException {
+        assertTrue("ID must be greater than 0", training1.getId() > 0);
+
+        final List<Training> trainings = trainingService.findTrainingByAthlete(athlete);
+
+        assertEquals(2, trainings.size());
+    }
+
+    @Test
     public void testReadWriteFullTraining() throws FileNotFoundException {
-        training = trainingService.doSave(training);
-        assertTrue("ID must be greater than 0", training.getId() > 0);
+        assertTrue("ID must be greater than 0", training1.getId() > 0);
 
-        final Training trainingFromDb = trainingService.findFullTraining(training.getId());
+        final Training trainingFromDb = trainingService.findFullTraining(training1.getId());
 
-        assertPoints(training.getTrackPoints(), trainingFromDb.getTrackPoints());
-        assertLaps(training.getLapInfos(), trainingFromDb.getLapInfos());
+        assertPoints(training1.getTrackPoints(), trainingFromDb.getTrackPoints());
+        assertLaps(training1.getLapInfos(), trainingFromDb.getLapInfos());
         assertNotNull(trainingFromDb.getAthlete());
     }
 

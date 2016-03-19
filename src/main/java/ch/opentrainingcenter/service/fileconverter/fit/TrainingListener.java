@@ -3,8 +3,6 @@ package ch.opentrainingcenter.service.fileconverter.fit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-
 import com.garmin.fit.LapMesg;
 import com.garmin.fit.Mesg;
 import com.garmin.fit.MesgListener;
@@ -20,16 +18,15 @@ import ch.opentrainingcenter.model.Tracktrainingproperty;
 import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.helper.DistanceHelper;
 
-@RequestScoped
 public class TrainingListener implements MesgListener {
 
     private static final String RECORD = "record"; //$NON-NLS-1$
     private static final String SESSION = "session"; //$NON-NLS-1$
     private static final String LAP = "lap"; //$NON-NLS-1$
+
     private final List<Tracktrainingproperty> trackpoints = new ArrayList<>();
     private final List<LapInfo> lapInfos = new ArrayList<>();
     private SessionMesg session;
-    private LapMesg lapMesg;
     private LapInfo lap = null;
     private int error = 0;
     private int valid = 0;
@@ -42,7 +39,7 @@ public class TrainingListener implements MesgListener {
         } else if (SESSION.equals(messageName)) {
             session = new SessionMesg(mesg);
         } else if (LAP.equals(messageName)) {
-            lapMesg = new LapMesg(mesg);
+            final LapMesg lapMesg = new LapMesg(mesg);
             final int end = lapMesg.getTotalDistance().intValue();
             final int timeInSekunden = lapMesg.getTotalTimerTime().intValue();
             final int timeInMillis = lapMesg.getTotalTimerTime().intValue() * 1000;

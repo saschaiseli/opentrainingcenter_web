@@ -1,12 +1,12 @@
 package ch.opentrainingcenter.service.persistence;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import ch.opentrainingcenter.model.Athlete;
 import ch.opentrainingcenter.model.Shoe;
@@ -20,11 +20,9 @@ public class ShoeServiceBean extends RepositoryServiceBean<Shoe> implements Shoe
 
     @Override
     public Collection<Shoe> getShoesByAthlete(final Athlete athlete) {
-        final Query query = entityManager.createNamedQuery("Shoe.getShoesByAthlete");
+        final TypedQuery<Shoe> query = entityManager.createNamedQuery("Shoe.getShoesByAthlete", Shoe.class);
         query.setParameter("athlete", athlete);
-        @SuppressWarnings("unchecked")
-        final List<Shoe> resultList = query.getResultList();
-        return resultList;
+        return query.getResultList();
     }
 
     @Override

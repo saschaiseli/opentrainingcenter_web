@@ -16,12 +16,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@NamedQueries({ //
+        @NamedQuery(name = "Training.getTrainingByAthlete", query = "SELECT t FROM TRAINING t where t.athlete=:athlete order by t.datum") })
 @Entity(name = "TRAINING")
 public class Training {
     @Id
