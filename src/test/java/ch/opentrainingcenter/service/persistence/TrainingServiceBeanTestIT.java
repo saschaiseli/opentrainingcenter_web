@@ -19,6 +19,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
 import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,7 +73,10 @@ public class TrainingServiceBeanTestIT {
     @Before
     public void setUp() throws FileNotFoundException {
         training1 = service.convert(new FileInputStream(new File(FOLDER, "2014_09_11.fit")));
+        training1.setDateOfImport(DateTime.now().toDate());
+
         training2 = service.convert(new FileInputStream(new File(FOLDER, "2014_09_09.fit")));
+        training2.setDateOfImport(DateTime.now().toDate());
 
         athlete = CommonTransferFactory.createAthlete("firstName", "lastName", "mail@opentrainingceter.ch", "password");
         athleteService.doSave(athlete);
@@ -96,6 +100,7 @@ public class TrainingServiceBeanTestIT {
     @Test
     public void testReadWriteTraining() throws FileNotFoundException {
         assertTrue("ID must be greater than 0", training1.getId() > 0);
+        assertNotNull(training1.getDateOfImport());
 
         final Training trainingFromDb = trainingService.find(Training.class, training1.getId());
 
@@ -109,7 +114,7 @@ public class TrainingServiceBeanTestIT {
 
         assertEquals(2, trainings.size());
 
-        assertTrue("First Training must be first element", trainings.get(0).getDatum() > trainings.get(1).getDatum());
+        assertTrue("First Training must be first element", trainings.get(0).getDateOfStart().getTime() > trainings.get(1).getDateOfStart().getTime());
     }
 
     @Test

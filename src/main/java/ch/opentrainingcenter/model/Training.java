@@ -25,7 +25,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedQueries({ //
-        @NamedQuery(name = "Training.getTrainingByAthlete", query = "SELECT t FROM TRAINING t where t.athlete=:athlete order by t.datum desc") })
+        @NamedQuery(name = "Training.getTrainingByAthlete", query = "SELECT t FROM TRAINING t where t.athlete=:athlete order by t.dateOfStart desc") })
 @Entity(name = "TRAINING")
 public class Training {
     @Id
@@ -34,7 +34,8 @@ public class Training {
     @Column(name = "ID_TRAINING")
     private int id;
 
-    private long datum;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOfStart;
 
     private long dauer;
     private long laengeInMeter;
@@ -64,6 +65,7 @@ public class Training {
     private List<Tracktrainingproperty> trackPoints = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date dateOfImport;
 
     private String fileName;
@@ -89,7 +91,7 @@ public class Training {
     }
 
     public Training(final RunData runData, final HeartRate heart, final String remark, final Weather wetter, final Route strecke) {
-        datum = runData.getDateOfStart();
+        dateOfStart = runData.getDateOfStart();
         dauer = runData.getTimeInSeconds();
         laengeInMeter = runData.getDistanceInMeter();
         averageHeartBeat = heart.getAverage();
@@ -140,12 +142,12 @@ public class Training {
         this.athlete = athlete;
     }
 
-    public long getDatum() {
-        return datum;
+    public Date getDateOfStart() {
+        return dateOfStart;
     }
 
-    public void setDatum(final long datum) {
-        this.datum = datum;
+    public void setDateOfStart(final Date date) {
+        dateOfStart = date;
     }
 
     public long getDauer() {
@@ -233,7 +235,7 @@ public class Training {
     @SuppressWarnings("nls")
 
     public String toString() {
-        return "Training [datum=" + new Date(datum) + ", dauer=" + dauer + ", laengeInMeter=" + laengeInMeter + ", athlete=" + athlete + ", trainingType="
+        return "Training [dateOfStart=" + dateOfStart + ", dauer=" + dauer + ", laengeInMeter=" + laengeInMeter + ", athlete=" + athlete + ", trainingType="
                 + trainingType + ", route=" + route + ", fileName=" + fileName + "]";
     }
 

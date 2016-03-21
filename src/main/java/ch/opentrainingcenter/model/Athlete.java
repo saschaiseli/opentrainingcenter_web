@@ -10,13 +10,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
-@Entity
+@NamedQueries({ //
+        @NamedQuery(name = "Athlete.findByEmail", query = "SELECT a FROM ATHLETE a where a.email=:email") })
+
+@Entity(name = "ATHLETE")
 public class Athlete {
 
     @Id
@@ -39,6 +44,9 @@ public class Athlete {
 
     @Column(nullable = true)
     private int maxheartrate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLogin;
 
     @OneToMany(mappedBy = "athlete", cascade = CascadeType.REMOVE)
     private Set<Route> routes = new HashSet<>();
@@ -173,6 +181,14 @@ public class Athlete {
 
     public void setShoes(final Set<Shoe> shoes) {
         this.shoes = shoes;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(final Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
     @Override

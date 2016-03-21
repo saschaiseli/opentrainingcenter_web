@@ -1,11 +1,13 @@
 package ch.opentrainingcenter.model;
 
+import java.util.Date;
+
 /**
  * Info zu einem Lauf
  */
 public class RunData {
 
-    private final long dateOfStart;
+    private final Date date;
     private final long timeInSeconds;
     private final long distanceInMeter;
     private final double maxSpeed;
@@ -19,8 +21,8 @@ public class RunData {
      *            Distanz in meter
      * @param maxSpeed
      */
-    public RunData(final long dateOfStart, final long timeInSeconds, final long distanceInMeter, final double maxSpeed) {
-        this.dateOfStart = dateOfStart;
+    public RunData(final Date date, final long timeInSeconds, final long distanceInMeter, final double maxSpeed) {
+        this.date = date;
         this.timeInSeconds = timeInSeconds;
         this.distanceInMeter = distanceInMeter;
         this.maxSpeed = maxSpeed;
@@ -29,8 +31,8 @@ public class RunData {
     /**
      * @return Zeitpunkt des Startes in ms
      */
-    public long getDateOfStart() {
-        return dateOfStart;
+    public Date getDateOfStart() {
+        return date;
     }
 
     /**

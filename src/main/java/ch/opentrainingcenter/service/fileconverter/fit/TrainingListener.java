@@ -1,6 +1,7 @@
 package ch.opentrainingcenter.service.fileconverter.fit;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.garmin.fit.LapMesg;
@@ -85,12 +86,11 @@ public class TrainingListener implements MesgListener {
         final long timeInSeconds = (end - dateOfStart) / 1000;
         final long distanceInMeter = session.getTotalDistance().longValue();
         final double maxSpeed = session.getMaxSpeed();
-        final RunData runData = new RunData(dateOfStart, timeInSeconds, distanceInMeter, maxSpeed);
+        final RunData runData = new RunData(new Date(dateOfStart), timeInSeconds, distanceInMeter, maxSpeed);
         final int average = session.getAvgHeartRate() != null ? session.getAvgHeartRate().intValue() : -1;
         final int max = session.getMaxHeartRate() != null ? session.getMaxHeartRate().intValue() : -1;
         final HeartRate heart = new HeartRate(average, max);
         final Training training = CommonTransferFactory.createTraining(runData, heart);
-        training.setDatum(dateOfStart);
         training.setTrackPoints(trackpoints);
         for (final Tracktrainingproperty tt : trackpoints) {
             tt.setTraining(training);

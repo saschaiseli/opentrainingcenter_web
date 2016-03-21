@@ -77,6 +77,7 @@ public class ShoeServiceBeanTestIT {
     @Before
     public void setUp() throws FileNotFoundException {
         training = service.convert(new FileInputStream(new File(FOLDER, "2014_09_11.fit")));
+        training.setDateOfImport(DateTime.now().toDate());
         athlete = CommonTransferFactory.createAthlete("firstName", "lastName", "mail@opentrainingceter.ch", "password");
         athleteService.doSave(athlete);
         training.setAthlete(athlete);

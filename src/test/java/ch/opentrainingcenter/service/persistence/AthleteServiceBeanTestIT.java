@@ -107,6 +107,16 @@ public class AthleteServiceBeanTestIT {
     }
 
     @Test
+    public void testFindByEmail_notFound() {
+        assertNull("Athlete not found", athleteService.findByEmail("blabla"));
+    }
+
+    @Test
+    public void testFindByEmail_Found() {
+        assertEquals("Athlete found", athlete.getId(), athleteService.findByEmail(athlete.getEmail()).getId());
+    }
+
+    @Test
     public void testUpdateAthlete_NotFound() {
         final Athlete other = CommonTransferFactory.createAthlete("2first name", "2last name", "2test@opentrainingcenter.ch", "2abc");
         other.setId(42);
