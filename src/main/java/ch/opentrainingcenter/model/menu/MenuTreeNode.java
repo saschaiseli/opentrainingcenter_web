@@ -27,20 +27,22 @@ public class MenuTreeNode extends DefaultTreeNode {
 
         final List<TreeNode> years = getChildren();
         boolean added = false;
+        int index = 0;
         for (final TreeNode year : years) {
             final YearTreeNode yearTreeNode = (YearTreeNode) year;
             if (yearTreeNode.getYear() == yearNumber) {
                 yearTreeNode.addChild(training);
                 added = true;
-
+                break;
+            } else if (yearTreeNode.getYear() > yearNumber) {
+                index++;
             }
         }
         if (!added) {
             // year does not already exists
             final YearTreeNode trNode = new YearTreeNode(yearNumber);
             trNode.addChild(training);
-            getChildren().add(trNode);
+            getChildren().add(index, trNode);
         }
     }
-
 }

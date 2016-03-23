@@ -37,7 +37,7 @@ public class ConvertFitEJBTest {
 
     private static final String FOLDER = "src/test/resources/fit";
     @Inject
-    ConvertFitEJB service;
+    private ConvertFitEJB service;
 
     @Deployment
     public static WebArchive createDeployment() {

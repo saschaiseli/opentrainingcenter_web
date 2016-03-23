@@ -1,6 +1,7 @@
 package ch.opentrainingcenter.model.menu;
 
 import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 
 import ch.opentrainingcenter.model.Training;
 
@@ -19,6 +20,15 @@ public class CalendarWeekTreeNode extends DefaultTreeNode {
     }
 
     public void addChild(final Training training) {
-        getChildren().add(new TrainingChild(training));
+        int index = 0;
+        for (final TreeNode item : getChildren()) {
+            final TrainingChild tr = (TrainingChild) item;
+            if (tr.getTraining().getDateOfStart().getTime() > training.getDateOfStart().getTime()) {
+                index++;
+            } else {
+                break;
+            }
+        }
+        getChildren().add(index, new TrainingChild(training));
     }
 }

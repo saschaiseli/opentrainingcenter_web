@@ -13,4 +13,8 @@ public class TrainingChild extends DefaultTreeNode {
         super(training.getId() + " " + training.getFileName());
         this.training = training;
     }
+
+    public Training getTraining() {
+        return training;
+    }
 }
