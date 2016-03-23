@@ -48,8 +48,8 @@ public class FileUploadView {
             training.setDateOfImport(DateTime.now().toDate());
             training.setAthlete(scope.getApplicationUser());
             final long startTime = System.currentTimeMillis();
-            eventManager.fire(training);
             trainingService.doSave(training);
+            eventManager.fire(training);
             final long estimatedTime = System.currentTimeMillis() - startTime;
             message = new FacesMessage("SUCCESS", event.getFile().getFileName() + " uploaded in " + estimatedTime + "[ms]");
         } catch (final Exception e) {
