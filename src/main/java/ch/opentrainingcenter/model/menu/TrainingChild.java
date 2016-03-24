@@ -3,6 +3,7 @@ package ch.opentrainingcenter.model.menu;
 import org.primefaces.model.DefaultTreeNode;
 
 import ch.opentrainingcenter.model.Training;
+import ch.opentrainingcenter.service.helper.TimeHelper;
 
 public class TrainingChild extends DefaultTreeNode {
 
@@ -10,7 +11,7 @@ public class TrainingChild extends DefaultTreeNode {
     private final Training training;
 
     public TrainingChild(final Training training) {
-        super(training.getId() + " " + training.getFileName());
+        super(TimeHelper.convertDateToString(training.getDateOfStart()));
         this.training = training;
     }
 

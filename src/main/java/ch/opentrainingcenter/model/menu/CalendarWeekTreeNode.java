@@ -11,7 +11,7 @@ public class CalendarWeekTreeNode extends DefaultTreeNode {
     private final int calWeek;
 
     public CalendarWeekTreeNode(final int calWeek) {
-        super("KW_" + calWeek);
+        super("Week " + calWeek);
         this.calWeek = calWeek;
     }
 

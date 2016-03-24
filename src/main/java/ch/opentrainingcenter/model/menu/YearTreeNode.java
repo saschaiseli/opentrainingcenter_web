@@ -4,17 +4,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Model;
-
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.helper.TimeHelper;
 
-@Model
-@SessionScoped
 public class YearTreeNode extends DefaultTreeNode {
 
     private static final long serialVersionUID = 1L;

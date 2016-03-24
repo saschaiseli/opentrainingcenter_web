@@ -1,5 +1,7 @@
 package ch.opentrainingcenter.controller;
 
+import java.io.IOException;
+
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +16,7 @@ import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.TrainingService;
 import ch.opentrainingcenter.service.fileconverter.fit.ConvertFitEJB;
 import ch.opentrainingcenter.util.Events.Added;
+import ch.opentrainingcenter.util.Events.Deleted;
 
 @ManagedBean
 public class FileUploadView {
@@ -31,7 +34,11 @@ public class FileUploadView {
 
     @Inject
     @Added
-    private Event<Training> eventManager;
+    private Event<Training> eventAddManager;
+
+    @Inject
+    @Deleted
+    private Event<Training> eventDeleteManager;
 
     public UploadedFile getFile() {
         return file;
@@ -43,17 +50,21 @@ public class FileUploadView {
 
     public void handleFileUpload(final FileUploadEvent event) {
         FacesMessage message = null;
+        Training training = null;
         try {
-            final Training training = convert.convert(event.getFile().getInputstream());
+            training = convert.convert(event.getFile().getInputstream());
             training.setDateOfImport(DateTime.now().toDate());
             training.setAthlete(scope.getApplicationUser());
             final long startTime = System.currentTimeMillis();
+            eventAddManager.fire(training);
             trainingService.doSave(training);
-            eventManager.fire(training);
             final long estimatedTime = System.currentTimeMillis() - startTime;
             message = new FacesMessage("SUCCESS", event.getFile().getFileName() + " uploaded in " + estimatedTime + "[ms]");
+        } catch (final IOException e) {
+            message = new FacesMessage("Fehler beim konvertieren", event.getFile().getFileName() + " " + e.getMessage());
         } catch (final Exception e) {
-            message = new FacesMessage("ERROR", event.getFile().getFileName() + " " + e.getMessage());
+            message = new FacesMessage("Datenbankfehler", event.getFile().getFileName() + " " + e.getMessage());
+            eventDeleteManager.fire(training);
         } finally {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }

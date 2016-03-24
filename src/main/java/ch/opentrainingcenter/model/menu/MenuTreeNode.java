@@ -1,6 +1,7 @@
 package ch.opentrainingcenter.model.menu;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -43,6 +44,33 @@ public class MenuTreeNode extends DefaultTreeNode {
             final YearTreeNode trNode = new YearTreeNode(yearNumber);
             trNode.addChild(training);
             getChildren().add(index, trNode);
+        }
+    }
+
+    public void removeNode(final Training training) {
+        final List<TreeNode> years = getChildren();
+        final Iterator<TreeNode> yearIterator = years.iterator();
+        while (yearIterator.hasNext()) {
+            final TreeNode nextYear = yearIterator.next();
+            final List<TreeNode> cws = nextYear.getChildren();
+            final Iterator<TreeNode> calWeekIterator = cws.iterator();
+            while (calWeekIterator.hasNext()) {
+                final CalendarWeekTreeNode cwtn = (CalendarWeekTreeNode) calWeekIterator.next();
+                final Iterator<TreeNode> trainingChilIterator = cwtn.getChildren().iterator();
+                while (trainingChilIterator.hasNext()) {
+                    final TrainingChild trainingChild = (TrainingChild) trainingChilIterator.next();
+                    if (training.getDateOfStart().getTime() == trainingChild.getTraining().getDateOfStart().getTime()) {
+                        trainingChilIterator.remove();
+                        if (cwtn.getChildCount() == 0) {
+                            calWeekIterator.remove();
+                            if (nextYear.getChildCount() == 0) {
+                                yearIterator.remove();
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
         }
     }
 }

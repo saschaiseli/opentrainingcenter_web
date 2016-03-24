@@ -50,4 +50,9 @@ public class MenuServiceBean implements Serializable {
         root.addNode(training);
     }
 
+    public void remove(final Training training) {
+        LOGGER.info("Remove Training from Navigation Tree");
+        root.removeNode(training);
+    }
+
 }

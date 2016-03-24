@@ -35,6 +35,7 @@ public class Training {
     private int id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(unique = true)
     private Date dateOfStart;
 
     private long dauer;
@@ -68,7 +69,6 @@ public class Training {
     @Column(nullable = false)
     private Date dateOfImport;
 
-    private String fileName;
     private Integer upMeter;
     private Integer downMeter;
 
@@ -223,22 +223,6 @@ public class Training {
 
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(final String fileName) {
-        this.fileName = fileName;
-    }
-
-    @Override
-    @SuppressWarnings("nls")
-
-    public String toString() {
-        return "Training [dateOfStart=" + dateOfStart + ", dauer=" + dauer + ", laengeInMeter=" + laengeInMeter + ", athlete=" + athlete + ", trainingType="
-                + trainingType + ", route=" + route + ", fileName=" + fileName + "]";
-    }
-
     public Integer getUpMeter() {
         return upMeter;
     }
@@ -285,6 +269,13 @@ public class Training {
 
     public void setTrainingEffect(final Integer trainingEffect) {
         this.trainingEffect = trainingEffect;
+    }
+
+    @Override
+    public String toString() {
+        return "Training [dateOfStart=" + dateOfStart + ", dauer=" + dauer + ", laengeInMeter=" + laengeInMeter + ", averageHeartBeat=" + averageHeartBeat
+                + ", maxHeartBeat=" + maxHeartBeat + ", maxSpeed=" + maxSpeed + ", athlete=" + athlete + ", sport=" + sport + ", trainingEffect="
+                + trainingEffect + "]";
     }
 
 }
