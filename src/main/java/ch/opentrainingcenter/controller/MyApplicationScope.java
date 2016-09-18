@@ -11,24 +11,27 @@ import ch.opentrainingcenter.service.AthleteService;
 @ApplicationScoped
 public class MyApplicationScope {
 
-    private static final String DUMMY_EMAIL = "dummy@opentrainingcenter.ch";
+	private static final String DUMMY_EMAIL = "dummy@opentrainingcenter.ch";
 
-    @Inject
-    private AthleteService service;
+	@Inject
+	private AthleteService service;
 
-    private Athlete applicationUser;
+	private Athlete applicationUser;
 
-    @PostConstruct
-    public void initAthlete() {
-        final Athlete athlete = service.findByEmail(DUMMY_EMAIL);
-        if (athlete == null) {
-            applicationUser = CommonTransferFactory.createAthlete("Dummy", "Dummy", DUMMY_EMAIL, "password");
-            service.doSave(applicationUser);
-        }
-    }
+	@PostConstruct
+	public void initAthlete() {
+		final Athlete athlete = service.findByEmail(DUMMY_EMAIL);
+		if (athlete == null) {
+			applicationUser = CommonTransferFactory.createAthlete("Dummy", "Dummy", DUMMY_EMAIL, "password");
+			service.doSave(applicationUser);
+		} else {
+			applicationUser = athlete;
+		}
 
-    public Athlete getApplicationUser() {
-        return applicationUser;
-    }
+	}
+
+	public Athlete getApplicationUser() {
+		return applicationUser;
+	}
 
 }
