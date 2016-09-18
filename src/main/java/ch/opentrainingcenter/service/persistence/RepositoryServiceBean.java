@@ -15,7 +15,6 @@ public class RepositoryServiceBean<T> implements RepositoryService<T> {
 	@Override
 	public T doSave(final T t) {
 		em.persist(t);
-		em.flush();
 		return t;
 	}
 
