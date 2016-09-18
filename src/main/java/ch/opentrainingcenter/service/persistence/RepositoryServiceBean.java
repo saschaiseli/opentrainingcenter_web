@@ -9,29 +9,30 @@ import ch.opentrainingcenter.service.RepositoryService;
 @Stateless
 public class RepositoryServiceBean<T> implements RepositoryService<T> {
 
-    @PersistenceContext(unitName = "otc")
-    protected EntityManager entityManager;
+	@PersistenceContext(unitName = "otc")
+	protected EntityManager em;
 
-    @Override
-    public T doSave(final T t) {
-        entityManager.persist(t);
-        return t;
-    }
+	@Override
+	public T doSave(final T t) {
+		em.persist(t);
+		em.flush();
+		return t;
+	}
 
-    @Override
-    public T update(final T t) {
-        return entityManager.merge(t);
-    }
+	@Override
+	public T update(final T t) {
+		return em.merge(t);
+	}
 
-    @Override
-    public void remove(final Class<T> type, final int id) {
-        final T managed = entityManager.find(type, id);
-        entityManager.remove(managed);
-    }
+	@Override
+	public void remove(final Class<T> type, final int id) {
+		final T managed = em.find(type, id);
+		em.remove(managed);
+	}
 
-    @Override
-    public T find(final Class<T> type, final int id) {
-        return entityManager.find(type, id);
-    }
+	@Override
+	public T find(final Class<T> type, final int id) {
+		return em.find(type, id);
+	}
 
 }

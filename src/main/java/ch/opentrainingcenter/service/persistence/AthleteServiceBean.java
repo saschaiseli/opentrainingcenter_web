@@ -13,21 +13,21 @@ import ch.opentrainingcenter.service.AthleteService;
 @Stateless
 public class AthleteServiceBean extends RepositoryServiceBean<Athlete> implements AthleteService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AthleteServiceBean.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AthleteServiceBean.class);
 
-    @Override
-    public Athlete findByEmail(final String email) {
+	@Override
+	public Athlete findByEmail(final String email) {
 
-        final TypedQuery<Athlete> query = entityManager.createNamedQuery("Athlete.findByEmail", Athlete.class);
-        query.setParameter("email", email);
-        Athlete result = null;
-        try {
-            result = query.getSingleResult();
-            LOGGER.info("athlete with email '{}' found", email);
-        } catch (final NoResultException noResult) {
-            LOGGER.info("Athlete with email '{}' not found ", email);
-        }
-        return result;
-    }
+		final TypedQuery<Athlete> query = em.createNamedQuery("Athlete.findByEmail", Athlete.class);
+		query.setParameter("email", email);
+		Athlete result = null;
+		try {
+			result = query.getSingleResult();
+			LOGGER.info("athlete with email '{}' found", email);
+		} catch (final NoResultException noResult) {
+			LOGGER.info("Athlete with email '{}' not found ", email);
+		}
+		return result;
+	}
 
 }
