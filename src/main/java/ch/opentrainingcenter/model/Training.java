@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -62,7 +61,7 @@ public class Training {
 	@JoinColumn(name = "ID_FK_SHOES")
 	private Shoe shoe;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<Tracktrainingproperty> trackPoints = new ArrayList<>();
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -72,7 +71,7 @@ public class Training {
 	private Integer upMeter;
 	private Integer downMeter;
 
-	@OneToMany(mappedBy = "training", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "training", orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<LapInfo> lapInfos = new ArrayList<>();
 
 	@Enumerated(EnumType.ORDINAL)
