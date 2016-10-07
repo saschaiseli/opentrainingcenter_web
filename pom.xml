@@ -14,6 +14,7 @@
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.hibernate>5.2.2.Final</version.hibernate>
+		<version.jsf.primefaces>4.0</version.jsf.primefaces>
 	</properties>
 
 	<dependencies>
@@ -26,7 +27,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<version>${version.jsf.primefaces}</version>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -57,11 +58,13 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.19</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${version.hibernate}</version>
 		</dependency>
+		 -->
 		<!-- TEST -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -96,7 +99,7 @@
 			<groupId>org.jboss.arquillian</groupId>
 			<artifactId>arquillian-bom</artifactId>
 			<version>1.1.2.Final</version>
-			<scope>import</scope>
+			<scope>test</scope>
 			<type>pom</type>
 		</dependency>
 		<dependency>
@@ -104,7 +107,7 @@
 			<artifactId>shrinkwrap-resolver-bom</artifactId>
 			<version>2.2.2</version>
 			<type>pom</type>
-			<scope>import</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.shrinkwrap.resolver</groupId>

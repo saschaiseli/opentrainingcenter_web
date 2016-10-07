@@ -3,13 +3,14 @@ package ch.opentrainingcenter.service.persistence;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import ch.opentrainingcenter.service.RepositoryService;
 
 @Stateless
 public class RepositoryServiceBean<T> implements RepositoryService<T> {
 
-	@PersistenceContext(unitName = "otc")
+	@PersistenceContext(unitName = "otc", type = PersistenceContextType.TRANSACTION)
 	protected EntityManager em;
 
 	@Override

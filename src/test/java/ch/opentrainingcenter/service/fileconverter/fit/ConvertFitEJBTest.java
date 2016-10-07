@@ -14,17 +14,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import javax.inject.Inject;
 import javax.naming.NamingException;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import ch.opentrainingcenter.model.LapInfo;
 import ch.opentrainingcenter.model.Sport;
@@ -32,23 +25,10 @@ import ch.opentrainingcenter.model.Tracktrainingproperty;
 import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.service.helper.DistanceHelper;
 
-@RunWith(Arquillian.class)
 public class ConvertFitEJBTest {
 
 	private static final String FOLDER = "src/test/resources/fit";
-	@Inject
-	private ConvertFitEJB service;
-
-	@Deployment
-	public static WebArchive createDeployment() {
-		final File garminFitFile = new File("src/main/webapp/WEB-INF/lib", "fit_16.60.0.jar");
-		final WebArchive jar = ShrinkWrap.create(WebArchive.class)
-				.addClasses(DistanceHelper.class, ConvertGarminSemicircles.class, ConvertFitEJB.class,
-						TrainingListener.class)
-				.addPackage(Training.class.getPackage()).addAsLibraries(garminFitFile)
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-		return jar;
-	}
+	private final ConvertFitEJB service = new ConvertFitEJB();
 
 	@Before
 	public void setUp() {
