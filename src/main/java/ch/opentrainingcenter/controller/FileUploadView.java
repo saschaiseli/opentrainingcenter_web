@@ -21,6 +21,10 @@ import ch.opentrainingcenter.util.Events.Deleted;
 @ManagedBean
 public class FileUploadView {
 
+    private static final String SUCCESS = "Upload des Files '%s' war erfolgreich: Dauer %s [ms]";
+    private static final String CONVERT_ERROR = "Fehler beim konvertieren des Files '%s' mit der Meldung '%s'";
+    private static final String DB_ERROR = "Datenbankfehler: File '%s' konnte nicht gespeichert werden. Meldung: '%s'";
+
     private UploadedFile file;
 
     @Inject
@@ -51,6 +55,7 @@ public class FileUploadView {
     public void handleFileUpload(final FileUploadEvent event) {
         FacesMessage message = null;
         Training training = null;
+        final String fileName = event.getFile().getFileName();
         try {
             training = convert.convert(event.getFile().getInputstream());
             training.setDateOfImport(DateTime.now().toDate());
@@ -59,11 +64,11 @@ public class FileUploadView {
             eventAddManager.fire(training);
             trainingService.doSave(training);
             final long estimatedTime = System.currentTimeMillis() - startTime;
-            message = new FacesMessage("SUCCESS", event.getFile().getFileName() + " uploaded in " + estimatedTime + "[ms]");
+            message = new FacesMessage(String.format(SUCCESS, fileName, estimatedTime));
         } catch (final IOException e) {
-            message = new FacesMessage("Fehler beim konvertieren", event.getFile().getFileName() + " " + e.getMessage());
+            message = new FacesMessage(String.format(CONVERT_ERROR, fileName, e.getMessage()));
         } catch (final Exception e) {
-            message = new FacesMessage("Datenbankfehler", event.getFile().getFileName() + " " + e.getMessage());
+            message = new FacesMessage(String.format(DB_ERROR, fileName, e.getMessage()));
             eventDeleteManager.fire(training);
         } finally {
             FacesContext.getCurrentInstance().addMessage(null, message);

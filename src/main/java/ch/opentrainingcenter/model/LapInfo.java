@@ -27,7 +27,7 @@ public class LapInfo {
     private String pace;
 
     @ManyToOne
-    @JoinColumn(name = "ID_TRAINING")
+    @JoinColumn(name = "ID_FK_TRAINING")
     private Training training;
     private String geschwindigkeit;
 
