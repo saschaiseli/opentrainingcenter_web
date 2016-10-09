@@ -1,5 +1,8 @@
 package ch.opentrainingcenter.model.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -30,5 +33,13 @@ public class CalendarWeekTreeNode extends DefaultTreeNode {
             }
         }
         getChildren().add(index, new TrainingChild(training));
+    }
+
+    public List<Training> getTrainings() {
+        final List<Training> trainings = new ArrayList<>();
+        for (final TreeNode treeNode : getChildren()) {
+            trainings.add(((TrainingChild) treeNode.getData()).getTraining());
+        }
+        return trainings;
     }
 }
