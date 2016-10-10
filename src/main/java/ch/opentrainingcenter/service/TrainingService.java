@@ -9,6 +9,6 @@ public interface TrainingService extends RepositoryService<Training> {
 
     List<Training> findTrainingByAthlete(final Athlete athlete);
 
-    Training findFullTraining(int id);
+    Training findFullTraining(long id);
 
 }

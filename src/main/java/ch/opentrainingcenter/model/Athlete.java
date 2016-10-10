@@ -27,7 +27,7 @@ public class Athlete {
     @Id
     @SequenceGenerator(name = "ATHLETE_ID_SEQUENCE", sequenceName = "ATHLETE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ATHLETE_ID_SEQUENCE")
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String firstName;
@@ -73,11 +73,11 @@ public class Athlete {
         this.password = password;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 

@@ -7,24 +7,13 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:jboss/datasources/PostgresDS</jta-data-source>
 		<shared-cache-mode>ALL</shared-cache-mode>
-		<!-- Entities -->
-		<class>ch.opentrainingcenter.model.Athlete</class>
-		<class>ch.opentrainingcenter.model.Health</class>
-		<class>ch.opentrainingcenter.model.LapInfo</class>
-		<class>ch.opentrainingcenter.model.Planungwoche</class>
-		<class>ch.opentrainingcenter.model.Route</class>
-		<class>ch.opentrainingcenter.model.Shoe</class>
-		<class>ch.opentrainingcenter.model.Tracktrainingproperty</class>
-		<class>ch.opentrainingcenter.model.Training</class>
-		<class>ch.opentrainingcenter.model.Weather</class>
-
 		<!-- Hibernate Properties -->
-		<properties><!-- 
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			 -->
-			 <property name="hibernate.hbm2ddl.auto" value="update" />
+		<properties>
+		<!-- 
+		<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+		-->
+			<property name="hibernate.hbm2ddl.auto" value="update"/> 
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
-
 </persistence>

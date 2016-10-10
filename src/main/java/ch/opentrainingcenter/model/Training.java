@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,26 +19,18 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedQueries({ //
-        @NamedQuery(name = "Training.getTrainingByAthlete", query = "SELECT t FROM TRAINING t where t.athlete=:athlete order by t.dateOfStart desc") //
+        @NamedQuery(name = "Training.getTrainingByAthlete", query = "SELECT t FROM TRAINING t where t.athlete=:athlete order by t.id desc") //
 })
 @Cacheable
 @Entity(name = "TRAINING")
 public class Training {
+
     @Id
-    @SequenceGenerator(name = "TRAINING_ID_SEQUENCE", sequenceName = "TRAINING_ID_SEQUENCE")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINING_ID_SEQUENCE")
-    @Column(name = "ID_TRAINING")
-    private int id;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(unique = true)
-    private Date dateOfStart;
-
+    private long id;
     private long dauer;
     private long laengeInMeter;
     private int averageHeartBeat;
@@ -95,7 +85,7 @@ public class Training {
     }
 
     public Training(final RunData runData, final HeartRate heart, final String remark, final Weather wetter, final Route strecke) {
-        dateOfStart = runData.getDateOfStart();
+        id = runData.getDateOfStart().getTime();
         dauer = runData.getTimeInSeconds();
         laengeInMeter = runData.getDistanceInMeter();
         averageHeartBeat = heart.getAverage();
@@ -106,11 +96,11 @@ public class Training {
         route = strecke;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -147,11 +137,7 @@ public class Training {
     }
 
     public Date getDateOfStart() {
-        return dateOfStart;
-    }
-
-    public void setDateOfStart(final Date date) {
-        dateOfStart = date;
+        return new Date(id);
     }
 
     public long getDauer() {
@@ -277,7 +263,7 @@ public class Training {
 
     @Override
     public String toString() {
-        return "Training [dateOfStart=" + dateOfStart + ", dauer=" + dauer + ", laengeInMeter=" + laengeInMeter + ", averageHeartBeat=" + averageHeartBeat
+        return "Training [dateOfStart=" + new Date(id) + ", dauer=" + dauer + ", laengeInMeter=" + laengeInMeter + ", averageHeartBeat=" + averageHeartBeat
                 + ", maxHeartBeat=" + maxHeartBeat + ", maxSpeed=" + maxSpeed + ", athlete=" + athlete + ", sport=" + sport + ", trainingEffect="
                 + trainingEffect + "]";
     }

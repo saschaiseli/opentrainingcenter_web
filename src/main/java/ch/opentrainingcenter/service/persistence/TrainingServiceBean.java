@@ -20,7 +20,7 @@ public class TrainingServiceBean extends RepositoryServiceBean<Training> impleme
     }
 
     @Override
-    public Training findFullTraining(final int id) {
+    public Training findFullTraining(final long id) {
         final Training training = em.find(Training.class, id);
         training.getTrackPoints().size();
         training.getLapInfos().size();

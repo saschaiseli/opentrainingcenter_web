@@ -12,7 +12,7 @@ public class Tracktrainingproperty {
     @Id
     @SequenceGenerator(name = "TRACKPOINTPROPERTY_ID_SEQUENCE", sequenceName = "TRACKPOINTPROPERTY_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRACKPOINTPROPERTY_ID_SEQUENCE")
-    private int id;
+    private long id;
     private double distance;
     private int heartbeat;
     private int altitude;
@@ -36,11 +36,11 @@ public class Tracktrainingproperty {
         this.latitude = latitude;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 

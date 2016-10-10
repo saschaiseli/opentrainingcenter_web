@@ -164,7 +164,7 @@ public class MenuTreeNodeTest {
         assertEquals(1, tree.getChildren().size());
     }
 
-    private Training createTraining(final int id, final int year, final int month, final int day) {
+    private Training createTraining(final long id, final int year, final int month, final int day) {
         final Training training = mock(Training.class);
         final Calendar cal = Calendar.getInstance(locale);
         cal.set(year, month - 1, day);

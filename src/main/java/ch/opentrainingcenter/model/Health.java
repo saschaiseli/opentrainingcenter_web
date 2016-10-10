@@ -17,7 +17,7 @@ public class Health {
     @Id
     @SequenceGenerator(name = "HEALTH_ID_SEQUENCE", sequenceName = "HEALTH_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HEALTH_ID_SEQUENCE")
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "ID_FK_ATHLETE")
@@ -39,11 +39,11 @@ public class Health {
         this.dateofmeasure = dateofmeasure;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 

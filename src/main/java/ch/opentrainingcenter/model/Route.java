@@ -16,7 +16,7 @@ public class Route {
     @Id
     @SequenceGenerator(name = "ROUTE_ID_SEQUENCE", sequenceName = "ROUTE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROUTE_ID_SEQUENCE")
-    private int id;
+    private long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -40,11 +40,11 @@ public class Route {
         referenzTrack = referenzTraining;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 

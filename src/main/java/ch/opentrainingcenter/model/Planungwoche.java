@@ -13,7 +13,7 @@ public class Planungwoche {
     @Id
     @SequenceGenerator(name = "PLANUNGWOCHE_ID_SEQUENCE", sequenceName = "PLANUNGWOCHE_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PLANUNGWOCHE_ID_SEQUENCE")
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "ID_FK_ATHLETE")
@@ -36,11 +36,11 @@ public class Planungwoche {
         langerLauf = langerlauf;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 

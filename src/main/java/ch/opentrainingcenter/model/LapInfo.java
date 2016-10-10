@@ -14,7 +14,7 @@ public class LapInfo {
     @Id
     @SequenceGenerator(name = "LAPINFO_ID_SEQUENCE", sequenceName = "LAPINFO_ID_SEQUENCE")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LAPINFO_ID_SEQUENCE")
-    private int id;
+    private long id;
 
     private int lap;
     @Column(name = "LAP_START")
@@ -74,11 +74,11 @@ public class LapInfo {
         this.geschwindigkeit = geschwindigkeit;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(final int id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
