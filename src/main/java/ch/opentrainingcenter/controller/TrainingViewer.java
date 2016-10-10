@@ -11,8 +11,9 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.opentrainingcenter.gui.model.GTraining;
+import ch.opentrainingcenter.gui.service.GTrainingService;
 import ch.opentrainingcenter.model.Training;
-import ch.opentrainingcenter.service.TrainingService;
 import ch.opentrainingcenter.util.Events.Select;
 
 @ManagedBean(name = "trainingViewer")
@@ -25,23 +26,17 @@ public class TrainingViewer implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainingViewer.class);
 
     @Inject
-    private TrainingService service;
+    private GTrainingService service;
 
-    private Training training;
+    private GTraining training;
 
     public void onSelection(@Observes @Select final Training selected) {
         LOGGER.info("Show Training {}", selected.getId());
-        training = service.findFullTraining(selected.getId());
-        LOGGER.info("Loaded Training {} with {} trackpoints", getTraining().getId(), getTraining().getTrackPoints().size());
-        // RequestContext.getCurrentInstance().update("trainingView");
+        training = service.loadTraining(selected.getId());
     }
 
-    public Training getTraining() {
+    public GTraining getTraining() {
         return training;
-    }
-
-    public void setTraining(final Training training) {
-        this.training = training;
     }
 
 }

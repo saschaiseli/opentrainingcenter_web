@@ -5,7 +5,43 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <body>
 	<p:fragment id="trainingView">
-		training: #{trainingViewer.training.id} isch dir ID
+		<table>
+			<tr>
+				<TH>#{msg['training.head']}</TH>
+				<TH></TH>
+			</tr>
+			<TR>
+				<TD>#{msg['training.date']}</TD>
+				<TD>#{trainingViewer.training.startDatum} #{trainingViewer.training.startZeit}</TD>
+			</TR>
+			<TR>
+				<TD>#{msg['training.distance']}:</TD>
+				<TD>#{trainingViewer.training.distanz} km</TD>
+			</TR>
+			<TR>
+				<TD>#{msg['training.zeit']}:</TD>
+				<TD>#{trainingViewer.training.dauer}</TD>
+			</TR>
+						<TR>
+				<TD>#{msg['training.pace']}:</TD>
+				<TD>#{trainingViewer.training.pace}</TD>
+			</TR>
+						<TR>
+				<TD>#{msg['training.heart_avg']}:</TD>
+				<TD>#{trainingViewer.training.avgPace}</TD>
+			</TR>
+						<TR>
+				<TD>#{msg['training.heart_max']}:</TD>
+				<TD>#{trainingViewer.training.maxPace}</TD>
+			</TR>
+						<TR>
+				<TD>#{msg['training.effect']}:</TD>
+				<TD>#{trainingViewer.training.effect}</TD>
+			</TR>
+		</table>
+
+
+
 	</p:fragment>
 </body>
 </html>
