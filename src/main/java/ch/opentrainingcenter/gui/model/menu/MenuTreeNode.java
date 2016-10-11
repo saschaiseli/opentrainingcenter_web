@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.model.menu;
+package ch.opentrainingcenter.gui.model.menu;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
-import ch.opentrainingcenter.model.Training;
+import ch.opentrainingcenter.gui.model.GTraining;
 
 /**
  * Root
@@ -21,8 +21,8 @@ public class MenuTreeNode extends DefaultTreeNode {
         super("Root", null);
     }
 
-    public void addNode(final Training training) {
-        final Date dateOfStart = training.getDateOfStart();
+    public void addNode(final GTraining training) {
+        final Date dateOfStart = new Date(training.getStartInMillis());
         final DateTime dt = new DateTime(dateOfStart.getTime());
         final int yearNumber = dt.getYear();
 
@@ -47,7 +47,7 @@ public class MenuTreeNode extends DefaultTreeNode {
         }
     }
 
-    public void removeNode(final Training training) {
+    public void removeNode(final GTraining training) {
         final List<TreeNode> years = getChildren();
         final Iterator<TreeNode> yearIterator = years.iterator();
         while (yearIterator.hasNext()) {
@@ -59,7 +59,7 @@ public class MenuTreeNode extends DefaultTreeNode {
                 final Iterator<TreeNode> trainingChilIterator = cwtn.getChildren().iterator();
                 while (trainingChilIterator.hasNext()) {
                     final TrainingChild trainingChild = (TrainingChild) trainingChilIterator.next();
-                    if (training.getDateOfStart().getTime() == trainingChild.getTraining().getDateOfStart().getTime()) {
+                    if (training.getStartInMillis() == trainingChild.getTraining().getStartInMillis()) {
                         trainingChilIterator.remove();
                         if (cwtn.getChildCount() == 0) {
                             calWeekIterator.remove();

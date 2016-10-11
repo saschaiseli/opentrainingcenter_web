@@ -11,9 +11,10 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.opentrainingcenter.controller.MyApplicationScope;
+import ch.opentrainingcenter.gui.controller.MyApplicationScope;
+import ch.opentrainingcenter.gui.model.GTraining;
+import ch.opentrainingcenter.gui.model.menu.MenuTreeNode;
 import ch.opentrainingcenter.model.Training;
-import ch.opentrainingcenter.model.menu.MenuTreeNode;
 import ch.opentrainingcenter.service.TrainingService;
 
 @SessionScoped
@@ -37,7 +38,7 @@ public class MenuServiceBean implements Serializable {
         root = new MenuTreeNode();
         final List<Training> trainings = service.findTrainingByAthlete(appContext.getApplicationUser());
         for (final Training training : trainings) {
-            root.addNode(training);
+            root.addNode(new GTraining(training));
         }
     }
 
@@ -45,12 +46,12 @@ public class MenuServiceBean implements Serializable {
         return root;
     }
 
-    public void addTraining(final Training training) {
+    public void addTraining(final GTraining training) {
         LOGGER.info("Add Training to Navigation Tree");
         root.addNode(training);
     }
 
-    public void remove(final Training training) {
+    public void remove(final GTraining training) {
         LOGGER.info("Remove Training from Navigation Tree");
         root.removeNode(training);
     }

@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.controller;
+package ch.opentrainingcenter.gui.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.opentrainingcenter.model.Training;
-import ch.opentrainingcenter.model.menu.CalendarWeekTreeNode;
-import ch.opentrainingcenter.model.menu.TrainingChild;
-import ch.opentrainingcenter.model.menu.YearTreeNode;
+import ch.opentrainingcenter.gui.model.GTraining;
+import ch.opentrainingcenter.gui.model.menu.CalendarWeekTreeNode;
+import ch.opentrainingcenter.gui.model.menu.TrainingChild;
+import ch.opentrainingcenter.gui.model.menu.YearTreeNode;
 import ch.opentrainingcenter.service.menu.MenuServiceBean;
 import ch.opentrainingcenter.util.Events.Added;
 import ch.opentrainingcenter.util.Events.Deleted;
@@ -41,11 +41,11 @@ public class MenuView implements Serializable {
 
     @Inject
     @Select
-    private Event<Training> selectionEvent;
+    private Event<GTraining> selectionEvent;
 
     @Inject
     @Select
-    private Event<List<Training>> weekEvent;
+    private Event<List<GTraining>> weekEvent;
 
     private TreeNode selectedNode;
 
@@ -64,13 +64,13 @@ public class MenuView implements Serializable {
         return service.getTree();
     }
 
-    public void onAddTraining(@Observes @Added final Training training) {
+    public void onAddTraining(@Observes @Added final GTraining training) {
         LOGGER.info("onAddTraining");
         service.addTraining(training);
         RequestContext.getCurrentInstance().update("treeNavigation:tr");
     }
 
-    public void onDeletedTraining(@Observes @Deleted final Training training) {
+    public void onDeletedTraining(@Observes @Deleted final GTraining training) {
         LOGGER.info("onAddTraining");
         service.remove(training);
         RequestContext.getCurrentInstance().update("treeNavigation:tr");
@@ -85,7 +85,7 @@ public class MenuView implements Serializable {
         } else if (source instanceof CalendarWeekTreeNode) {
             final CalendarWeekTreeNode week = (CalendarWeekTreeNode) source;
             final List<TreeNode> children = week.getChildren();
-            final List<Training> trainings = new ArrayList<>();
+            final List<GTraining> trainings = new ArrayList<>();
             for (final TreeNode treeNode : children) {
                 final TrainingChild tc = (TrainingChild) treeNode;
                 trainings.add(tc.getTraining());

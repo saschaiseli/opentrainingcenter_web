@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.controller;
+package ch.opentrainingcenter.gui.controller;
 
 import java.io.Serializable;
 
@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import ch.opentrainingcenter.gui.model.GTraining;
 import ch.opentrainingcenter.gui.service.GTrainingService;
-import ch.opentrainingcenter.model.Training;
 import ch.opentrainingcenter.util.Events.Select;
 
 @ManagedBean(name = "trainingViewer")
@@ -30,9 +29,9 @@ public class TrainingViewer implements Serializable {
 
     private GTraining training;
 
-    public void onSelection(@Observes @Select final Training selected) {
-        LOGGER.info("Show Training {}", selected.getId());
-        training = service.loadTraining(selected.getId());
+    public void onSelection(@Observes @Select final GTraining selected) {
+        LOGGER.info("Show Training {}", selected.getStartInMillis());
+        training = service.loadTraining(selected.getStartInMillis());
     }
 
     public GTraining getTraining() {

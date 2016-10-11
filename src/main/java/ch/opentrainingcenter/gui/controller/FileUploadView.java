@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.controller;
+package ch.opentrainingcenter.gui.controller;
 
 import java.io.IOException;
 
@@ -8,13 +8,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import org.joda.time.DateTime;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import ch.opentrainingcenter.model.Training;
-import ch.opentrainingcenter.service.TrainingService;
-import ch.opentrainingcenter.service.fileconverter.fit.ConvertFitEJB;
+import ch.opentrainingcenter.gui.model.GTraining;
+import ch.opentrainingcenter.gui.service.GTrainingService;
 import ch.opentrainingcenter.util.Events.Added;
 import ch.opentrainingcenter.util.Events.Deleted;
 
@@ -28,21 +26,15 @@ public class FileUploadView {
     private UploadedFile file;
 
     @Inject
-    private ConvertFitEJB convert;
-
-    @Inject
-    private MyApplicationScope scope;
-
-    @Inject
-    private TrainingService trainingService;
+    GTrainingService gService;
 
     @Inject
     @Added
-    private Event<Training> eventAddManager;
+    private Event<GTraining> eventAddManager;
 
     @Inject
     @Deleted
-    private Event<Training> eventDeleteManager;
+    private Event<GTraining> eventDeleteManager;
 
     public UploadedFile getFile() {
         return file;
@@ -54,22 +46,19 @@ public class FileUploadView {
 
     public void handleFileUpload(final FileUploadEvent event) {
         FacesMessage message = null;
-        Training training = null;
+        GTraining gTraining = null;
         final String fileName = event.getFile().getFileName();
         try {
-            training = convert.convert(event.getFile().getInputstream());
-            training.setDateOfImport(DateTime.now().toDate());
-            training.setAthlete(scope.getApplicationUser());
             final long startTime = System.currentTimeMillis();
-            eventAddManager.fire(training);
-            trainingService.doSave(training);
+            gTraining = gService.storeGpsFile(event.getFile().getInputstream());
+            eventAddManager.fire(gTraining);
             final long estimatedTime = System.currentTimeMillis() - startTime;
             message = new FacesMessage(String.format(SUCCESS, fileName, estimatedTime));
         } catch (final IOException e) {
             message = new FacesMessage(String.format(CONVERT_ERROR, fileName, e.getMessage()));
         } catch (final Exception e) {
             message = new FacesMessage(String.format(DB_ERROR, fileName, e.getMessage()));
-            eventDeleteManager.fire(training);
+            eventDeleteManager.fire(gTraining);
         } finally {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }

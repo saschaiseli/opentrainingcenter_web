@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.model.menu;
+package ch.opentrainingcenter.gui.model.menu;
 
 import java.util.Date;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.Locale;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
-import ch.opentrainingcenter.model.Training;
+import ch.opentrainingcenter.gui.model.GTraining;
 import ch.opentrainingcenter.service.helper.TimeHelper;
 
 public class YearTreeNode extends DefaultTreeNode {
@@ -24,8 +24,8 @@ public class YearTreeNode extends DefaultTreeNode {
         return year;
     }
 
-    public void addChild(final Training training) {
-        final Date dateOfStart = training.getDateOfStart();
+    public void addChild(final GTraining training) {
+        final Date dateOfStart = new Date(training.getStartInMillis());
         final int weekOfWeekyear = TimeHelper.getKalenderWoche(dateOfStart, Locale.getDefault());
         final List<TreeNode> kwsOfYear = getChildren();
         boolean added = false;

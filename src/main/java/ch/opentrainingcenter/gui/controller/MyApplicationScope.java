@@ -1,4 +1,4 @@
-package ch.opentrainingcenter.controller;
+package ch.opentrainingcenter.gui.controller;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

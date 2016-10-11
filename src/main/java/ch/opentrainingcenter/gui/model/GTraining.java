@@ -21,9 +21,11 @@ public class GTraining {
     private final String avgPace;
     private final String maxPace;
     private final String effect;
+    private final long startInMillis;
 
     public GTraining(final Training training) {
         final Date date = new Date(training.getId());
+        startInMillis = date.getTime();
         startDatum = dfDate.format(date);
         startZeit = dfTime.format(date);
         distanz = DistanceHelper.roundDistanceFromMeterToKm(training.getLaengeInMeter());
@@ -32,14 +34,6 @@ public class GTraining {
         avgPace = String.valueOf(training.getAverageHeartBeat());
         maxPace = String.valueOf(training.getMaxHeartBeat());
         effect = String.valueOf(training.getTrainingEffect().doubleValue() / 10);
-    }
-
-    public SimpleDateFormat getDfDate() {
-        return dfDate;
-    }
-
-    public SimpleDateFormat getDfTime() {
-        return dfTime;
     }
 
     public String getStartDatum() {
@@ -72,6 +66,10 @@ public class GTraining {
 
     public String getEffect() {
         return effect;
+    }
+
+    public long getStartInMillis() {
+        return startInMillis;
     }
 
 }
