@@ -16,14 +16,14 @@ import org.primefaces.model.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.opentrainingcenter.gui.controller.Events.Added;
+import ch.opentrainingcenter.gui.controller.Events.Deleted;
+import ch.opentrainingcenter.gui.controller.Events.Select;
 import ch.opentrainingcenter.gui.model.GTraining;
 import ch.opentrainingcenter.gui.model.menu.CalendarWeekTreeNode;
 import ch.opentrainingcenter.gui.model.menu.TrainingChild;
 import ch.opentrainingcenter.gui.model.menu.YearTreeNode;
-import ch.opentrainingcenter.service.menu.MenuServiceBean;
-import ch.opentrainingcenter.util.Events.Added;
-import ch.opentrainingcenter.util.Events.Deleted;
-import ch.opentrainingcenter.util.Events.Select;
+import ch.opentrainingcenter.gui.service.menu.MenuServiceBean;
 
 @ManagedBean
 @ViewScoped

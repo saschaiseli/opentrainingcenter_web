@@ -4,9 +4,9 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import ch.opentrainingcenter.model.Athlete;
-import ch.opentrainingcenter.model.CommonTransferFactory;
-import ch.opentrainingcenter.service.AthleteService;
+import ch.opentrainingcenter.business.dbaccess.AthleteService;
+import ch.opentrainingcenter.business.domain.Athlete;
+import ch.opentrainingcenter.business.domain.CommonTransferFactory;
 
 @ApplicationScoped
 public class MyApplicationScope {

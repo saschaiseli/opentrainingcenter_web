@@ -7,15 +7,15 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 		<!-- Entities -->
-		<class>ch.opentrainingcenter.model.Athlete</class>
-		<class>ch.opentrainingcenter.model.Health</class>
-		<class>ch.opentrainingcenter.model.LapInfo</class>
-		<class>ch.opentrainingcenter.model.Planungwoche</class>
-		<class>ch.opentrainingcenter.model.Route</class>
-		<class>ch.opentrainingcenter.model.Shoe</class>
-		<class>ch.opentrainingcenter.model.Tracktrainingproperty</class>
-		<class>ch.opentrainingcenter.model.Training</class>
-		<class>ch.opentrainingcenter.model.Weather</class>
+		<class>ch.opentrainingcenter.business.domain.Athlete</class>
+		<class>ch.opentrainingcenter.business.domain.Health</class>
+		<class>ch.opentrainingcenter.business.domain.LapInfo</class>
+		<class>ch.opentrainingcenter.business.domain.Planungwoche</class>
+		<class>ch.opentrainingcenter.business.domain.Route</class>
+		<class>ch.opentrainingcenter.business.domain.Shoe</class>
+		<class>ch.opentrainingcenter.business.domain.Tracktrainingproperty</class>
+		<class>ch.opentrainingcenter.business.domain.Training</class>
+		<class>ch.opentrainingcenter.business.domain.Weather</class>
 
 		<!-- Hibernate Properties -->
 		<properties>

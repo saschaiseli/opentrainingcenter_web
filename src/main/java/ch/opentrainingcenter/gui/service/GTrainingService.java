@@ -5,9 +5,9 @@ import java.io.InputStream;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import ch.opentrainingcenter.business.dbaccess.TrainingService;
+import ch.opentrainingcenter.business.service.GpsFileService;
 import ch.opentrainingcenter.gui.model.GTraining;
-import ch.opentrainingcenter.service.TrainingService;
-import ch.opentrainingcenter.service.fileconverter.fit.GpsFileService;
 
 @Stateless
 public class GTrainingService {

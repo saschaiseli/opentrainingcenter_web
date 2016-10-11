@@ -7,8 +7,8 @@ import java.util.Locale;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
+import ch.opentrainingcenter.business.TimeHelper;
 import ch.opentrainingcenter.gui.model.GTraining;
-import ch.opentrainingcenter.service.helper.TimeHelper;
 
 public class YearTreeNode extends DefaultTreeNode {
 

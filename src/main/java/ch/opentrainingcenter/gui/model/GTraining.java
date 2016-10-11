@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import ch.opentrainingcenter.business.domain.Training;
 import ch.opentrainingcenter.gui.service.DistanceHelper;
 import ch.opentrainingcenter.gui.service.TimeHelper;
-import ch.opentrainingcenter.model.Training;
 
 public class GTraining {
 
