@@ -18,8 +18,8 @@ public class GTraining {
     private final String distanz;
     private final String dauer;
     private final String pace;
-    private final String avgPace;
-    private final String maxPace;
+    private final String avgHeart;
+    private final String maxHeart;
     private final String effect;
     private final long startInMillis;
 
@@ -31,8 +31,8 @@ public class GTraining {
         distanz = DistanceHelper.roundDistanceFromMeterToKm(training.getLaengeInMeter());
         dauer = TimeHelper.convertSecondsToHumanReadableZeit(training.getDauer());
         pace = DistanceHelper.calculatePace(training.getLaengeInMeter(), training.getDauer());
-        avgPace = String.valueOf(training.getAverageHeartBeat());
-        maxPace = String.valueOf(training.getMaxHeartBeat());
+        avgHeart = String.valueOf(training.getAverageHeartBeat());
+        maxHeart = String.valueOf(training.getMaxHeartBeat());
         effect = String.valueOf(training.getTrainingEffect().doubleValue() / 10);
     }
 
@@ -56,12 +56,12 @@ public class GTraining {
         return pace;
     }
 
-    public String getAvgPace() {
-        return avgPace;
+    public String getAvgHeart() {
+        return avgHeart;
     }
 
-    public String getMaxPace() {
-        return maxPace;
+    public String getMaxHeart() {
+        return maxHeart;
     }
 
     public String getEffect() {

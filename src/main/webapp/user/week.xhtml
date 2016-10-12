@@ -1,6 +1,40 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <body>
-week
+	<p:fragment id="weekView">
+		<p:dataTable var="training"
+			value="#{weekTrainingView.model.trainings}">
+			<p:column headerText="Start">
+				<h:outputText value="#{training.startDatum} / #{training.startZeit}" />
+			</p:column>
+
+			<p:column headerText="Distanz">
+				<h:outputText value="#{training.distanz}" />
+			</p:column>
+
+			<p:column headerText="Dauer">
+				<h:outputText value="#{training.dauer}" />
+			</p:column>
+
+			<p:column headerText="Pace">
+				<h:outputText value="#{training.pace}" />
+			</p:column>
+
+			<p:column headerText="Puls Durchschnitt">
+				<h:outputText value="#{training.avgHeart}" />
+			</p:column>
+
+			<p:column headerText="Puls max">
+				<h:outputText value="#{training.maxHeart}" />
+			</p:column>
+
+			<p:column headerText="TrainingEffect">
+				<h:outputText value="#{training.effect}" />
+			</p:column>
+		</p:dataTable>
+	</p:fragment>
 </body>
 </html>

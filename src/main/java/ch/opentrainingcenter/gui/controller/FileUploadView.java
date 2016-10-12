@@ -11,10 +11,10 @@ import javax.inject.Inject;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import ch.opentrainingcenter.business.service.GTrainingService;
 import ch.opentrainingcenter.gui.controller.Events.Added;
 import ch.opentrainingcenter.gui.controller.Events.Deleted;
 import ch.opentrainingcenter.gui.model.GTraining;
-import ch.opentrainingcenter.gui.service.GTrainingService;
 
 @ManagedBean
 public class FileUploadView {

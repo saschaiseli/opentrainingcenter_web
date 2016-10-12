@@ -11,9 +11,9 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.opentrainingcenter.business.service.GTrainingService;
 import ch.opentrainingcenter.gui.controller.Events.Select;
 import ch.opentrainingcenter.gui.model.GTraining;
-import ch.opentrainingcenter.gui.service.GTrainingService;
 
 @ManagedBean(name = "trainingViewer")
 @ViewScoped

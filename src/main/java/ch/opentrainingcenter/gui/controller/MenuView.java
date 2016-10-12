@@ -90,8 +90,8 @@ public class MenuView implements Serializable {
                 final TrainingChild tc = (TrainingChild) treeNode;
                 trainings.add(tc.getTraining());
             }
-            type = ContentType.WEEK;
             weekEvent.fire(trainings);
+            type = ContentType.WEEK;
         } else if (source instanceof YearTreeNode) {
             type = ContentType.YEAR;
         }
