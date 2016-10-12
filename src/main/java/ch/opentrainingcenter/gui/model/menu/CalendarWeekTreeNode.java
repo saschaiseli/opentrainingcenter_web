@@ -13,7 +13,7 @@ public class CalendarWeekTreeNode extends DefaultTreeNode {
     private static final long serialVersionUID = 1L;
     private final int calWeek;
 
-    public CalendarWeekTreeNode(final String text, final int calWeek) {
+    protected CalendarWeekTreeNode(final String text, final int calWeek) {
         super(text + " " + calWeek);
         this.calWeek = calWeek;
     }

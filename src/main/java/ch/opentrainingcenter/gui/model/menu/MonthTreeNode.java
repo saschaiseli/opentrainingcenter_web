@@ -17,13 +17,7 @@ public class MonthTreeNode extends DefaultTreeNode {
     private final int monthTraining;
     private final String kwText;
 
-    // public MonthTreeNode(final int monthTraining) {
-    // this(monthTraining,
-    // FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(),
-    // "#{msg['menu.kalenderwoche']}", String.class));
-    // }
-
-    public MonthTreeNode(final int monthTraining, final String kw) {
+    protected MonthTreeNode(final int monthTraining, final String kw) {
         super(new DateFormatSymbols().getMonths()[monthTraining - 1]);
         this.monthTraining = monthTraining;
         this.kwText = kw;

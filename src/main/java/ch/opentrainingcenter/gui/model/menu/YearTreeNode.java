@@ -1,7 +1,9 @@
 package ch.opentrainingcenter.gui.model.menu;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
@@ -14,7 +16,7 @@ public class YearTreeNode extends DefaultTreeNode {
     private final int year;
     private final String kw;
 
-    public YearTreeNode(final int year, final String kw) {
+    protected YearTreeNode(final int year, final String kw) {
         super(Integer.valueOf(year));
         this.year = year;
         this.kw = kw;
@@ -26,8 +28,9 @@ public class YearTreeNode extends DefaultTreeNode {
 
     public void addChild(final GTraining training) {
         final Date dateOfStart = new Date(training.getStartInMillis());
-        final int monthTraining = dateOfStart.getMonth() + 1;// TimeHelper.getKalenderWoche(dateOfStart,
-                                                             // Locale.getDefault());
+        final Calendar cal = Calendar.getInstance(Locale.getDefault());
+        cal.setTime(dateOfStart);
+        final int monthTraining = cal.get(Calendar.MONTH) + 1;
         final List<TreeNode> monthsOfYear = getChildren();
         boolean added = false;
         int index = 0;

@@ -6,7 +6,7 @@
 <body>
 	<p:fragment id="weekView">
 		<p:dataTable var="training"
-			value="#{weekTrainingView.model.trainings}">
+			value="#{multiTrainingView.model.trainings}">
 			<p:column headerText="Start">
 				<h:outputText value="#{training.startDatum} / #{training.startZeit}" />
 			</p:column>
@@ -34,6 +34,18 @@
 			<p:column headerText="TrainingEffect">
 				<h:outputText value="#{training.effect}" />
 			</p:column>
+
+			<p:columnGroup type="footer">
+				<p:row>
+					<p:column footerText="" />
+					<p:column footerText="#{multiTrainingView.model.distance}" />
+					<p:column footerText="#{multiTrainingView.model.dauer}" />
+					<p:column footerText="#{multiTrainingView.model.pace}" />
+					<p:column footerText="#{multiTrainingView.model.avgHeart}" />
+					<p:column footerText="#{multiTrainingView.model.maxHeart}" />
+					<p:column footerText="" />
+				</p:row>
+			</p:columnGroup>
 		</p:dataTable>
 	</p:fragment>
 </body>

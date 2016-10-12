@@ -20,9 +20,7 @@ import ch.opentrainingcenter.gui.controller.Events.Added;
 import ch.opentrainingcenter.gui.controller.Events.Deleted;
 import ch.opentrainingcenter.gui.controller.Events.Select;
 import ch.opentrainingcenter.gui.model.GTraining;
-import ch.opentrainingcenter.gui.model.menu.CalendarWeekTreeNode;
 import ch.opentrainingcenter.gui.model.menu.TrainingChild;
-import ch.opentrainingcenter.gui.model.menu.YearTreeNode;
 import ch.opentrainingcenter.gui.service.menu.MenuServiceBean;
 
 @ManagedBean
@@ -30,7 +28,7 @@ import ch.opentrainingcenter.gui.service.menu.MenuServiceBean;
 public class MenuView implements Serializable {
 
     private enum ContentType {
-        TRAINING, WEEK, YEAR
+        TRAINING, WEEK, MONTH, YEAR
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MenuView.class);
@@ -46,6 +44,10 @@ public class MenuView implements Serializable {
     @Inject
     @Select
     private Event<List<GTraining>> weekEvent;
+
+    // @Inject
+    // @Select
+    // private Event<List<GTraining>> monthEvent;
 
     private TreeNode selectedNode;
 
@@ -82,20 +84,24 @@ public class MenuView implements Serializable {
             final TrainingChild tc = (TrainingChild) source;
             selectionEvent.fire(tc.getTraining());
             type = ContentType.TRAINING;
-        } else if (source instanceof CalendarWeekTreeNode) {
-            final CalendarWeekTreeNode week = (CalendarWeekTreeNode) source;
-            final List<TreeNode> children = week.getChildren();
-            final List<GTraining> trainings = new ArrayList<>();
-            for (final TreeNode treeNode : children) {
-                final TrainingChild tc = (TrainingChild) treeNode;
-                trainings.add(tc.getTraining());
-            }
+        } else if (source instanceof TreeNode) {
+            final TreeNode tree = (TreeNode) source;
+            final List<GTraining> trainings = getTrainings(tree, new ArrayList<>());
             weekEvent.fire(trainings);
             type = ContentType.WEEK;
-        } else if (source instanceof YearTreeNode) {
-            type = ContentType.YEAR;
         }
         RequestContext.getCurrentInstance().update("main_content");
+    }
+
+    private List<GTraining> getTrainings(final TreeNode tree, final List<GTraining> result) {
+        for (final TreeNode tr : tree.getChildren()) {
+            if (tr.isLeaf()) {
+                result.add((((TrainingChild) tr).getTraining()));
+            } else {
+                getTrainings(tr, result);
+            }
+        }
+        return result;
     }
 
     public boolean isTraining() {
@@ -104,6 +110,10 @@ public class MenuView implements Serializable {
 
     public boolean isWeek() {
         return ContentType.WEEK.equals(type);
+    }
+
+    public boolean isMonth() {
+        return ContentType.MONTH.equals(type);
     }
 
     public boolean isYear() {

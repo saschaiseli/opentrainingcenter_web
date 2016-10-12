@@ -15,10 +15,10 @@ import ch.opentrainingcenter.gui.controller.Events.Select;
 import ch.opentrainingcenter.gui.model.GMultiTraining;
 import ch.opentrainingcenter.gui.model.GTraining;
 
-@ManagedBean(name = "weekTrainingView")
+@ManagedBean(name = "multiTrainingView")
 @ViewScoped
 @Named
-public class WeekTrainingView implements Serializable {
+public class MultiTrainingView implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
