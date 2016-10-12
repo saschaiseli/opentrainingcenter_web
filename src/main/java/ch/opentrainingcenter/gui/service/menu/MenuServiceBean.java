@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.model.TreeNode;
@@ -35,7 +36,9 @@ public class MenuServiceBean implements Serializable {
     @PostConstruct
     public void postConstruct() {
         LOGGER.info("Post Construct");
-        root = new MenuTreeNode();
+        final String kw = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(),
+                "#{msg['menu.kalenderwoche']}", String.class);
+        root = new MenuTreeNode(kw);
         final List<Training> trainings = service.findTrainingByAthlete(appContext.getApplicationUserId());
         for (final Training training : trainings) {
             root.addNode(new GTraining(training));

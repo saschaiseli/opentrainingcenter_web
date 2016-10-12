@@ -16,10 +16,6 @@ import org.junit.Test;
 import org.primefaces.model.TreeNode;
 
 import ch.opentrainingcenter.gui.model.GTraining;
-import ch.opentrainingcenter.gui.model.menu.CalendarWeekTreeNode;
-import ch.opentrainingcenter.gui.model.menu.MenuTreeNode;
-import ch.opentrainingcenter.gui.model.menu.TrainingChild;
-import ch.opentrainingcenter.gui.model.menu.YearTreeNode;
 
 public class MenuTreeNodeTest {
 
@@ -29,7 +25,7 @@ public class MenuTreeNodeTest {
 
     @Before
     public void setUp() {
-        tree = new MenuTreeNode();
+        tree = new MenuTreeNode("blabla");
     }
 
     @Test
@@ -62,10 +58,12 @@ public class MenuTreeNodeTest {
         assertEquals(2001, year_2001.getYear());
         assertEquals(3, children.size());
 
-        final List<TreeNode> kws_2001 = year_2001.getChildren();
-        assertEquals(2, kws_2001.size());
+        final List<TreeNode> months_2001 = year_2001.getChildren();
+        assertEquals(1, months_2001.size());
 
-        final CalendarWeekTreeNode cw11 = (CalendarWeekTreeNode) kws_2001.get(0);
+        final List<TreeNode> kws = months_2001.get(0).getChildren();
+
+        final CalendarWeekTreeNode cw11 = (CalendarWeekTreeNode) kws.get(0);
         final GTraining tr11_1 = ((TrainingChild) cw11.getChildren().get(0)).getTraining();
         assertEquals(id5, tr11_1.getStartInMillis());
 
@@ -73,7 +71,7 @@ public class MenuTreeNodeTest {
         assertEquals(id4, tr11_2.getStartInMillis());
         assertEquals(2, cw11.getChildren().size());
 
-        final CalendarWeekTreeNode cw10 = ((CalendarWeekTreeNode) kws_2001.get(1));
+        final CalendarWeekTreeNode cw10 = ((CalendarWeekTreeNode) kws.get(1));
         final GTraining tr10_1 = ((TrainingChild) cw10.getChildren().get(0)).getTraining();
         assertEquals(id3, tr10_1.getStartInMillis());
         assertEquals(1, cw10.getChildren().size());
@@ -116,10 +114,10 @@ public class MenuTreeNodeTest {
         assertEquals(2001, year_2001.getYear());
         assertEquals(3, children.size());
 
-        final List<TreeNode> kws_2001 = year_2001.getChildren();
-        assertEquals(1, kws_2001.size());
+        final List<TreeNode> months_2001 = year_2001.getChildren();
+        assertEquals(1, months_2001.size());
 
-        final CalendarWeekTreeNode cw11 = (CalendarWeekTreeNode) kws_2001.get(0);
+        final CalendarWeekTreeNode cw11 = (CalendarWeekTreeNode) months_2001.get(0).getChildren().get(0);
         final GTraining tr11_1 = ((TrainingChild) cw11.getChildren().get(0)).getTraining();
         assertEquals(id5, tr11_1.getStartInMillis());
 
