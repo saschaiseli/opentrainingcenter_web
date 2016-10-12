@@ -24,7 +24,6 @@ import ch.opentrainingcenter.business.domain.LapInfo;
 import ch.opentrainingcenter.business.domain.Sport;
 import ch.opentrainingcenter.business.domain.Tracktrainingproperty;
 import ch.opentrainingcenter.business.domain.Training;
-import ch.opentrainingcenter.business.service.fileconverter.fit.ConvertFitEJB;
 
 public class ConvertFitEJBTest {
 
@@ -35,6 +34,15 @@ public class ConvertFitEJBTest {
     public void setUp() {
         Locale.setDefault(Locale.GERMAN);
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Zurich"));
+    }
+
+    @Test
+    public void testIntervallTraining() throws FileNotFoundException {
+        final File file = new File(FOLDER, "6ACB4237.FIT");
+
+        final Training training = service.convert(new FileInputStream(file));
+        final long dauer = training.getDauer();
+        assertEquals(5641, dauer);
     }
 
     @Test
@@ -73,7 +81,7 @@ public class ConvertFitEJBTest {
         assertNotNull(training);
         assertNull("Ist null, da dieser Timestamp erst vom importer gesetzt", training.getDateOfImport());
         assertEquals("Lauf startet um 2014-09-11 19:18:35", convertToDate("2014-09-11 19:18:35"), training.getDateOfStart().getTime());
-        assertEquals("<TotalTimeSeconds>2003.2</TotalTimeSeconds>", 2008, training.getDauer());
+        assertEquals("<TotalTimeSeconds>2003.2</TotalTimeSeconds>", 2003, training.getDauer());
         assertEquals("<DistanceMeters>5297.08</DistanceMeters>", 5297, training.getLaengeInMeter());
         assertEquals("<MaximumSpeed>5.067</MaximumSpeed>", 5.067, training.getMaxSpeed(), 0.001);
         assertEquals("AverageHeartRateBpm", 132, training.getAverageHeartBeat());
