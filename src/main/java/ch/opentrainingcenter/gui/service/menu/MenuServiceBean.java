@@ -36,7 +36,7 @@ public class MenuServiceBean implements Serializable {
     public void postConstruct() {
         LOGGER.info("Post Construct");
         root = new MenuTreeNode();
-        final List<Training> trainings = service.findTrainingByAthlete(appContext.getApplicationUser());
+        final List<Training> trainings = service.findTrainingByAthlete(appContext.getApplicationUserId());
         for (final Training training : trainings) {
             root.addNode(new GTraining(training));
         }

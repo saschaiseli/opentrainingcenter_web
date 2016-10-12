@@ -13,8 +13,9 @@ import ch.opentrainingcenter.business.domain.Training;
 public class TrainingServiceBean extends RepositoryServiceBean<Training> implements TrainingService {
 
     @Override
-    public List<Training> findTrainingByAthlete(final Athlete athlete) {
+    public List<Training> findTrainingByAthlete(final long athleteId) {
         final TypedQuery<Training> query = em.createNamedQuery("Training.getTrainingByAthlete", Training.class);
+        final Athlete athlete = em.find(Athlete.class, athleteId);
         query.setParameter("athlete", athlete);
         return query.getResultList();
     }
