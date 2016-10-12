@@ -82,10 +82,6 @@ public class TrainingListener implements MesgListener {
 
     public Training getTraining() {
         final long dateOfStart = session.getStartTime().getDate().getTime();
-        System.out.println("Start:" + session.getStartTime().getDate());
-        System.out.println("End:" + session.getTimestamp().getDate());
-        System.out.println("timertime:" + session.getTotalTimerTime());
-        // final long timeInSeconds = (end - dateOfStart) / 1000;
         final long timeInSeconds = session.getTotalTimerTime().longValue();
         final long distanceInMeter = session.getTotalDistance().longValue();
         final double maxSpeed = session.getMaxSpeed();
