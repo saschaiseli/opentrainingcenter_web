@@ -3,6 +3,9 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+
 <body>
 	<p:fragment id="trainingView">
 		<table>
@@ -12,33 +15,42 @@
 			</tr>
 			<TR>
 				<TD>#{msg['training.date']}</TD>
-				<TD>#{trainingViewer.training.startDatum} #{trainingViewer.training.startZeit}</TD>
+				<TD>#{trainingView.training.startDatum}
+					#{trainingView.training.startZeit}</TD>
 			</TR>
 			<TR>
 				<TD>#{msg['training.distance']}:</TD>
-				<TD>#{trainingViewer.training.distanz} km</TD>
+				<TD>#{trainingView.training.distanz} km</TD>
 			</TR>
 			<TR>
 				<TD>#{msg['training.zeit']}:</TD>
-				<TD>#{trainingViewer.training.dauer}</TD>
+				<TD>#{trainingView.training.dauer}</TD>
 			</TR>
-						<TR>
+			<TR>
 				<TD>#{msg['training.pace']}:</TD>
-				<TD>#{trainingViewer.training.pace}</TD>
+				<TD>#{trainingView.training.pace}</TD>
 			</TR>
-						<TR>
+			<TR>
 				<TD>#{msg['training.heart_avg']}:</TD>
-				<TD>#{trainingViewer.training.avgHeart}</TD>
+				<TD>#{trainingView.training.avgHeart}</TD>
 			</TR>
-						<TR>
+			<TR>
 				<TD>#{msg['training.heart_max']}:</TD>
-				<TD>#{trainingViewer.training.maxHeart}</TD>
+				<TD>#{trainingView.training.maxHeart}</TD>
 			</TR>
-						<TR>
+			<TR>
 				<TD>#{msg['training.effect']}:</TD>
-				<TD>#{trainingViewer.training.effect}</TD>
+				<TD>#{trainingView.training.effect}</TD>
 			</TR>
 		</table>
 	</p:fragment>
+	<h:form>
+		<p:growl id="growl" life="3000" />
+		<p:gmap id="gmap" center="46.94599720649421,7.4297271855175495" zoom="13" type="HYBRID"
+			style="width:100%;height:400px" model="#{trainingView.polylineModel}">
+			<p:ajax event="overlaySelect"
+				listener="#{trainingView.onPolylineSelect}" update="growl" />
+		</p:gmap>
+	</h:form>
 </body>
 </html>

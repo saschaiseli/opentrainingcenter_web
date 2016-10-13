@@ -1,14 +1,33 @@
 package ch.opentrainingcenter.gui.model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import ch.opentrainingcenter.business.domain.Tracktrainingproperty;
 import ch.opentrainingcenter.business.domain.Training;
 import ch.opentrainingcenter.gui.service.DistanceHelper;
 import ch.opentrainingcenter.gui.service.TimeHelper;
 
 public class GTraining {
+
+    public class Coord {
+        public final double lat;
+        public final double lng;
+
+        public Coord(final double lat, final double lng) {
+            this.lat = lat;
+            this.lng = lng;
+        }
+
+        @Override
+        public String toString() {
+            return "lat: " + lat + " lng: " + lng;
+        }
+    }
 
     private final SimpleDateFormat dfDate = new SimpleDateFormat("dd.MM.YYYY", Locale.getDefault());
     private final SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
@@ -23,7 +42,13 @@ public class GTraining {
     private final String effect;
     private final long startInMillis;
 
+    private final List<Coord> coords = new ArrayList<>();
+
     public GTraining(final Training training) {
+        this(training, Collections.emptyList());
+    }
+
+    public GTraining(final Training training, final List<Tracktrainingproperty> trackpoints) {
         final Date date = new Date(training.getId());
         startInMillis = date.getTime();
         startDatum = dfDate.format(date);
@@ -34,6 +59,12 @@ public class GTraining {
         avgHeart = String.valueOf(training.getAverageHeartBeat());
         maxHeart = String.valueOf(training.getMaxHeartBeat());
         effect = String.valueOf(training.getTrainingEffect().doubleValue() / 10);
+        for (final Tracktrainingproperty point : trackpoints) {
+            if (point.getLatitude() != null && point.getLongitude() != null) {
+                final Coord cord = new Coord(point.getLatitude(), point.getLongitude());
+                coords.add(cord);
+            }
+        }
     }
 
     public String getStartDatum() {
@@ -70,6 +101,10 @@ public class GTraining {
 
     public long getStartInMillis() {
         return startInMillis;
+    }
+
+    public List<Coord> getCoords() {
+        return Collections.unmodifiableList(coords);
     }
 
 }

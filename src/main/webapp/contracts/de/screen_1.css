@@ -18,7 +18,7 @@ div#container {
 
 #left {
 	float: left;
-	width: 350px;
+	width: 200px;
 	padding:5px;
 	height: auto !important; /* normale Browser */
 	height: 100%; /* IE6: setzt dies wie min-height um*/
@@ -27,8 +27,7 @@ div#container {
 }
 
 #center {
-	display: inline-block;
-  /*  width:78%;*/
+ 	margin: 0 210px;
 	padding:5px;
 	height: auto !important; /* normale Browser */
 	height: 100%; /* IE6: setzt dies wie min-height um*/
@@ -39,6 +38,7 @@ div#container {
 #right {
 	float: right;
 	padding:5px;
+	width: 200px;
 	background-color: maroon;
 	height: auto !important; /* normale Browser */
 	height: 100%; /* IE6: setzt dies wie min-height um*/
@@ -60,4 +60,10 @@ div#footer {
 }
 h2 {
 	font-size: 1.2em;
+}
+
+/*** override primefaces styles ***/
+.ui-tree {
+    position: relative;
+    width: 200px;
 }

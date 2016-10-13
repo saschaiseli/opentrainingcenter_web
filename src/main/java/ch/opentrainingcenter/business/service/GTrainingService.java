@@ -27,7 +27,8 @@ public class GTrainingService {
     private MyApplicationScope scope;
 
     public GTraining loadTraining(final long dbId) {
-        return new GTraining(service.findFullTraining(dbId));
+        final Training training = service.findFullTraining(dbId);
+        return new GTraining(training, training.getTrackPoints());
     }
 
     public GTraining storeGpsFile(final InputStream stream) {
