@@ -29,6 +29,21 @@ public class GTraining {
         }
     }
 
+    public class PointData {
+
+        public final double distance;
+        public final int altitude;
+        public final int heart;
+        public final long zeitInMillis;
+
+        public PointData(final double distance, final int altitude, final int heart, final long zeitInMillis) {
+            this.distance = distance;
+            this.altitude = altitude;
+            this.heart = heart;
+            this.zeitInMillis = zeitInMillis;
+        }
+    }
+
     private final SimpleDateFormat dfDate = new SimpleDateFormat("dd.MM.YYYY", Locale.getDefault());
     private final SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
 
@@ -43,6 +58,7 @@ public class GTraining {
     private final long startInMillis;
 
     private final List<Coord> coords = new ArrayList<>();
+    private final List<PointData> datas = new ArrayList<>();
 
     public GTraining(final Training training) {
         this(training, Collections.emptyList());
@@ -64,6 +80,7 @@ public class GTraining {
                 final Coord cord = new Coord(point.getLatitude(), point.getLongitude());
                 coords.add(cord);
             }
+            datas.add(new PointData(point.getDistance(), point.getAltitude(), point.getHeartBeat(), point.getZeit()));
         }
     }
 
@@ -105,6 +122,10 @@ public class GTraining {
 
     public List<Coord> getCoords() {
         return Collections.unmodifiableList(coords);
+    }
+
+    public List<PointData> getDatas() {
+        return Collections.unmodifiableList(datas);
     }
 
 }

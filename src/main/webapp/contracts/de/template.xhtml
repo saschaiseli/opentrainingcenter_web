@@ -34,12 +34,12 @@
 			</div>
 			<div id="center">
 				<p:dialog id="fileUploadDialog" header="Modal Dialog"
-					widgetVar="dlg2" modal="true" height="100">
+					widgetVar="fileUpload" modal="true" height="100">
 					<h:form enctype="multipart/form-data">
 						<p:fileUpload
 							fileUploadListener="#{fileUploadView.handleFileUpload}"
 							mode="advanced" dragDropSupport="false" multiple="true"
-							update="messages" onstart="dlg2.hide();" />
+							update="messages" onstart="PF('fileUpload').hide();"/>
 						<p:growl id="messages" showDetail="true" />
 					</h:form>
 				</p:dialog>
@@ -57,7 +57,7 @@
 		<p:dock>
 			<p:menuitem value="#{msg['dock.upload']}"
 				icon="/images/dock/ic_add_circle_black_48dp.png"
-				onclick="PF('dlg2').show();" url="#" />
+				onclick="PF('fileUpload').show();" url="#" />
 			<p:menuitem value="#{msg['dock.export']}"
 				icon="/images/dock/ic_cloud_upload_black_48dp.png" url="#" />
 			<p:menuitem value="#{msg['dock.addHeart']}"

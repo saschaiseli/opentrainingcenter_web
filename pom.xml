@@ -14,7 +14,7 @@
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.hibernate>5.2.2.Final</version.hibernate>
-		<version.jsf.primefaces>4.0</version.jsf.primefaces>
+		<version.jsf.primefaces>6.0</version.jsf.primefaces>
 	</properties>
 
 	<dependencies>

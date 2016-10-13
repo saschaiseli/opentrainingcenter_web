@@ -45,10 +45,6 @@ public class MenuView implements Serializable {
     @Select
     private Event<List<GTraining>> weekEvent;
 
-    // @Inject
-    // @Select
-    // private Event<List<GTraining>> monthEvent;
-
     private TreeNode selectedNode;
 
     public TreeNode getSelectedNode() {
