@@ -6,7 +6,9 @@
 
 <body>
 	<p:fragment id="singleChartView">
-		<p:chart type="line" model="#{singleChartView.heartModel}" style="height:400px;"/>
+		<p:chart type="line" model="#{singleChartView.heartModel}" style="height:400px;" widgetVar="chart"/>
+		<p:commandButton type="button" value="Reset" icon="ui-icon-cancel" onclick="PF('chart').resetZoom()"/>
+		
 	</p:fragment>
 </body>
 </html>
