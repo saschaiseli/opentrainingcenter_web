@@ -22,6 +22,7 @@ public class ChartService {
         final LineChartModel model = new LineChartModel();
         model.setZoom(true);
         model.setSeriesColors(color);
+        model.setExtender("chartExtender");
 
         final LineChartSeries serie = new LineChartSeries();
         serie.setYaxis(AxisType.Y);
@@ -48,8 +49,8 @@ public class ChartService {
         }
 
         final Axis xAxis = model.getAxis(AxisType.X);
-        xAxis.setMin(-100);
-        xAxis.setMax(dist * 1.03);
+        xAxis.setMin(0);
+        xAxis.setMax(dist);
 
         model.addSeries(serie);
 
@@ -58,6 +59,15 @@ public class ChartService {
         yAxis.setMin(min.doubleValue() * 0.97);
         yAxis.setMax(max.doubleValue() * 1.03);
 
+        return model;
+    }
+
+    public LineChartModel createLineChart(final GTraining training, final Function<PointData, Number> functionX, final Function<PointData, Number> functionY,
+            final String label, final String color, final int yMin, final int yMax) {
+        final LineChartModel model = createLineChart(training, functionX, functionY, label, color);
+        final Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setMin(yMin);
+        yAxis.setMax(yMax);
         return model;
     }
 }

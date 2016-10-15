@@ -21,4 +21,9 @@ public class ChartServiceDelegate {
         return chartService.createLineChart(training, functionX, functionY, label, color);
     }
 
+    public LineChartModel createLineChart(final GTraining training, final Function<PointData, Number> functionX, final Function<PointData, Number> functionY,
+            final String label, final String color, final int yMin, final int yMax) {
+        return chartService.createLineChart(training, functionX, functionY, label, color, yMin, yMax);
+    }
+
 }

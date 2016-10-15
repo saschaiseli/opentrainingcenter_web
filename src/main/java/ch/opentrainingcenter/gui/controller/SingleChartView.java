@@ -32,8 +32,9 @@ public class SingleChartView extends TrainingSelectionObserver implements Serial
     @Override
     void onSelectSingleTraining(final GTraining training) {
         this.training = training;
-        heartModel = chartService.createLineChart(training, ((final PointData pd) -> pd.distance), ((final PointData pd) -> pd.heart), "Herz", "F56767");
-        hoeheModel = chartService.createLineChart(training, ((final PointData pd) -> pd.distance), ((final PointData pd) -> pd.altitude), "Höhe", "F56767");
+        heartModel = chartService.createLineChart(training, ((final PointData pd) -> pd.distance), ((final PointData pd) -> pd.heart), "Herz", "b30000", 50,
+                200);
+        hoeheModel = chartService.createLineChart(training, ((final PointData pd) -> pd.distance), ((final PointData pd) -> pd.altitude), "Höhe", "0099ff");
     }
 
     public GTraining getTraining() {

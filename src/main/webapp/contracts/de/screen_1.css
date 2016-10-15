@@ -32,7 +32,7 @@ div#container {
 	height: auto !important; /* normale Browser */
 	height: 100%; /* IE6: setzt dies wie min-height um*/
 	min-height: 100%; /* normale Browser */
-	background-color: lime;
+	background-color: #d7d4d4;
 }
 
 #right {
