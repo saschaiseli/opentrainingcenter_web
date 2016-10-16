@@ -19,16 +19,16 @@ div#container {
 #left {
 	float: left;
 	width: 200px;
-	padding:5px;
+	padding: 5px;
 	height: auto !important; /* normale Browser */
 	height: 100%; /* IE6: setzt dies wie min-height um*/
 	min-height: 100%; /* normale Browser */
-	background-color: fuchsia; 
+	background-color: fuchsia;
 }
 
 #center {
- 	margin: 0 210px;
-	padding:5px;
+	margin: 0 210px;
+	padding: 5px;
 	height: auto !important; /* normale Browser */
 	height: 100%; /* IE6: setzt dies wie min-height um*/
 	min-height: 100%; /* normale Browser */
@@ -37,7 +37,7 @@ div#container {
 
 #right {
 	float: right;
-	padding:5px;
+	padding: 5px;
 	width: 200px;
 	background-color: maroon;
 	height: auto !important; /* normale Browser */
@@ -45,7 +45,7 @@ div#container {
 	min-height: 100%; /* normale Browser */
 }
 
-.schedule{
+.schedule {
 	width: 350px;
 	background-color: aqua;
 }
@@ -58,12 +58,13 @@ div#footer {
 	margin-right: 10;
 	text-align: right;
 }
+
 h2 {
 	font-size: 1.2em;
 }
 
 /*** override primefaces styles ***/
 .ui-tree {
-    position: relative;
-    width: 200px;
+	position: relative;
+	width: 200px;
 }

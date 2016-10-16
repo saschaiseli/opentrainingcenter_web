@@ -16,20 +16,15 @@
 		function chartExtender() {
 			this.cfg.grid = {
 				background : 'transparent',
-				gridLineColor : '#303030',
 				drawBorder : false,
+				shadow : false,
+				gridLineColor : '#FFFFFF',
+				gridLineWidth : 1,
 				highlighter : {
 					show : true,
 					sizeAdjust : 1,
-					tooltipOffset : 9
-				},
-				grid : {
-					background : 'rgba(57,57,57,0.0)',
-					drawBorder : false,
-					shadow : false,
-					gridLineColor : '#666666',
-					gridLineWidth : 2
-				},
+					tooltipOffset : 91
+				}
 			}
 		}
 	</script>
@@ -77,29 +72,32 @@
 		<div id="footer">
 			<p>(C) 2016 by opentrainingcenter.ch</p>
 		</div>
-		<p:dock>
-			<p:menuitem value="#{msg['dock.upload']}"
-				icon="/images/dock/ic_add_circle_black_48dp.png"
-				onclick="PF('fileUpload').show();" url="#" />
-			<p:menuitem value="#{msg['dock.export']}"
-				icon="/images/dock/ic_cloud_upload_black_48dp.png" url="#" />
-			<p:menuitem value="#{msg['dock.addHeart']}"
-				icon="/images/dock/ic_favorite_black_48dp.png" url="#" />
-			<p:menuitem value="#{msg['dock.sortByStrecke']}"
-				icon="/images/dock/ic_find_in_page_black_48dp.png" url="#" />
-			<p:menuitem value="#{msg['dock.trainingsplaene']}"
-				icon="/images/dock/ic_today_black_48dp.png" url="#" />
-			<p:menuitem value="#{msg['dock.strecken']}"
-				icon="/images/dock/203-earth.png" url="#" />
-			<p:menuitem value="#{msg['dock.schuhe']}"
-				icon="/images/dock/running_shoes.png" url="#" />
-			<p:menuitem value="#{msg['dock.charts']}"
-				icon="/images/dock/ic_timeline_black_48dp.png" url="#" />
-			<p:menuitem value="#{msg['dock.userSettings']}"
-				icon="/images/dock/ic_settings_applications_black_48dp.png" url="#" />
-			<p:menuitem value="#{msg['dock.about']}"
-				icon="/images/dock/ic_copyright_black_48dp.png" url="#" />
-		</p:dock>
+		<div id="navigation">
+			<p:dock>
+				<p:menuitem value="#{msg['dock.upload']}"
+					icon="/images/dock/ic_add_circle_black_48dp.png"
+					onclick="PF('fileUpload').show();" url="#" />
+				<p:menuitem value="#{msg['dock.export']}"
+					icon="/images/dock/ic_cloud_upload_black_48dp.png" url="#" />
+				<p:menuitem value="#{msg['dock.addHeart']}"
+					icon="/images/dock/ic_favorite_black_48dp.png" url="#" />
+				<p:menuitem value="#{msg['dock.sortByStrecke']}"
+					icon="/images/dock/ic_find_in_page_black_48dp.png" url="#" />
+				<p:menuitem value="#{msg['dock.trainingsplaene']}"
+					icon="/images/dock/ic_today_black_48dp.png" url="#" />
+				<p:menuitem value="#{msg['dock.strecken']}"
+					icon="/images/dock/203-earth.png" url="#" />
+				<p:menuitem value="#{msg['dock.schuhe']}"
+					icon="/images/dock/running_shoes.png" url="#" />
+				<p:menuitem value="#{msg['dock.charts']}"
+					icon="/images/dock/ic_timeline_black_48dp.png" url="#" />
+				<p:menuitem value="#{msg['dock.userSettings']}"
+					icon="/images/dock/ic_settings_applications_black_48dp.png" url="#" />
+				<p:menuitem value="#{msg['dock.about']}"
+					icon="/images/dock/ic_copyright_black_48dp.png" url="#" />
+			</p:dock>
+		</div>
+
 
 	</div>
 	<script type="text/javascript">
