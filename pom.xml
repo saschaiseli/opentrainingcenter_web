@@ -13,8 +13,19 @@
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Lib versionen -->
 		<version.hibernate>5.2.2.Final</version.hibernate>
 		<version.jsf.primefaces>6.0</version.jsf.primefaces>
+		<version.junit>4.12</version.junit>
+		<version.jak>2.2.0</version.jak>
+		<version.log4j>1.2.17</version.log4j>
+		<version.garmin>16.60</version.garmin>
+		<version.joda>2.9.2</version.joda>
+		<version.slf4j>1.7.19</version.slf4j>
+		
+		<!-- Test libs -->
+		<version.mockito>1.9.5</version.mockito>
+		<version.wildfly.arquillian>8.1.0.Final</version.wildfly.arquillian>
 	</properties>
 
 	<dependencies>
@@ -32,55 +43,48 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.9.2</version>
+			<version>${version.joda}</version>
 		</dependency>
 		<dependency>
 			<groupId>garmin.com</groupId>
 			<artifactId>fit-sdk</artifactId>
-			<version>16.60</version>
+			<version>${version.garmin}</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/fit_16.60.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>de.micromata.jak</groupId>
 			<artifactId>JavaAPIforKml</artifactId>
-			<version>2.2.0</version>
+			<version>${version.jak}</version>
 		</dependency>
 		<!-- Logging -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<version>${version.log4j}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.19</version>
+			<version>${version.slf4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.19</version>
+			<version>${version.slf4j}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
-			<version>${version.hibernate}</version>
-		</dependency>
-		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-entitymanager</artifactId> 
-			<version>${version.hibernate}</version> </dependency> -->
 		<!-- TEST -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-			<version>4.8.1</version>
+			<version>${version.junit}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
+			<version>${version.mockito}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -91,13 +95,13 @@
 		<dependency>
 			<groupId>org.wildfly</groupId>
 			<artifactId>wildfly-arquillian-container-managed</artifactId>
-			<version>8.1.0.Final</version>
+			<version>${version.wildfly.arquillian}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.4</version>
+			<version>${version.slf4j}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
