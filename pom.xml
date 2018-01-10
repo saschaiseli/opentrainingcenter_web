@@ -5,7 +5,7 @@
 
 	<groupId>ch.opentrainingcenter</groupId>
 	<artifactId>opentrainingcenter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>OpenTrainingCenter</name>
 	<description>Online Daten aus Sportuhren analysieren.</description>
@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Lib versionen -->
 		<version.hibernate>5.2.2.Final</version.hibernate>
-		<version.jsf.primefaces>6.0</version.jsf.primefaces>
+		<version.jsf.primefaces>6.1</version.jsf.primefaces>
 		<version.junit>4.12</version.junit>
 		<version.jak>2.2.0</version.jak>
 		<version.log4j>1.2.17</version.log4j>

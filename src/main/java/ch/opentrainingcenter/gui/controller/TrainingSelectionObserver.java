@@ -12,7 +12,7 @@ import ch.opentrainingcenter.gui.controller.Events.Select;
 import ch.opentrainingcenter.gui.model.GTraining;
 
 @Stateless
-public abstract class TrainingSelectionObserver {
+public class TrainingSelectionObserver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainingSelectionObserver.class);
 
@@ -25,5 +25,7 @@ public abstract class TrainingSelectionObserver {
         onSelectSingleTraining(training);
     }
 
-    abstract void onSelectSingleTraining(final GTraining training);
+    void onSelectSingleTraining(final GTraining training) {
+        LOGGER.info("blabla");
+    };
 }

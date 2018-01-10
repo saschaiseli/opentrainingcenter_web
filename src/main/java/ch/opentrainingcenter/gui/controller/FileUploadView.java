@@ -45,6 +45,7 @@ public class FileUploadView {
     }
 
     public void handleFileUpload(final FileUploadEvent event) {
+        System.out.println("sdfsdfsdf");
         FacesMessage message = null;
         GTraining gTraining = null;
         final String fileName = event.getFile().getFileName();

@@ -15,7 +15,10 @@ div#container {
 	min-height: 100%; /* normale Browser */
 	background-color: orange;
 }
-
+div#top{
+	float: top;
+	height: 20px;
+}
 #left {
 	float: left;
 	width: 200px;

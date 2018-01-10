@@ -1,7 +1,10 @@
 package ch.opentrainingcenter.business.service;
 
 import java.io.InputStream;
+import java.security.Principal;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -24,10 +27,16 @@ public class GpsFileService {
     @Inject
     private AthleteService aService;
 
-    public Training convertAndStoreGpsFile(final InputStream gpsFile, final long athleteId) {
+    @Resource
+    private SessionContext sessionContext;
+
+    public Training convertAndStoreGpsFile(final InputStream gpsFile) {
         final Training training = convert.convert(gpsFile);
         training.setDateOfImport(DateTime.now().toDate());
-        final Athlete athlete = aService.find(Athlete.class, athleteId);
+
+        final Principal principal = sessionContext.getCallerPrincipal();
+        String email = principal.getName();
+        final Athlete athlete = aService.findByEmail(email);
         training.setAthlete(athlete);
         service.doSave(training);
         return training;

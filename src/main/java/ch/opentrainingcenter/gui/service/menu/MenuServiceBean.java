@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import ch.opentrainingcenter.business.dbaccess.TrainingService;
 import ch.opentrainingcenter.business.domain.Training;
-import ch.opentrainingcenter.gui.controller.MyApplicationScope;
 import ch.opentrainingcenter.gui.model.GTraining;
 import ch.opentrainingcenter.gui.model.menu.MenuTreeNode;
 
@@ -30,16 +29,13 @@ public class MenuServiceBean implements Serializable {
     @Inject
     private TrainingService service;
 
-    @Inject
-    private MyApplicationScope appContext;
-
     @PostConstruct
     public void postConstruct() {
         LOGGER.info("Post Construct");
         final String kw = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(),
                 "#{msg['menu.kalenderwoche']}", String.class);
         root = new MenuTreeNode(kw);
-        final List<Training> trainings = service.findTrainingByAthlete(appContext.getApplicationUserId());
+        final List<Training> trainings = service.findTrainingByAthlete(42);
         for (final Training training : trainings) {
             root.addNode(new GTraining(training));
         }

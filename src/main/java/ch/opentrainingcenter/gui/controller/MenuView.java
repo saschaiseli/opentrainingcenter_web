@@ -23,7 +23,7 @@ import ch.opentrainingcenter.gui.model.GTraining;
 import ch.opentrainingcenter.gui.model.menu.TrainingChild;
 import ch.opentrainingcenter.gui.service.menu.MenuServiceBean;
 
-@ManagedBean
+@ManagedBean(name = "menuView")
 @ViewScoped
 public class MenuView implements Serializable {
 
@@ -76,6 +76,7 @@ public class MenuView implements Serializable {
 
     public void onNodeSelect(final NodeSelectEvent event) {
         final Object source = event.getTreeNode();
+        LOGGER.debug("node Selected...." + source.getClass());
         if (source instanceof TrainingChild) {
             final TrainingChild tc = (TrainingChild) source;
             selectionEvent.fire(tc.getTraining());

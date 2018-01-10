@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import ch.opentrainingcenter.business.dbaccess.TrainingService;
 import ch.opentrainingcenter.business.domain.Training;
 import ch.opentrainingcenter.business.service.converter.ConvertMultiTraining;
-import ch.opentrainingcenter.gui.controller.MyApplicationScope;
 import ch.opentrainingcenter.gui.model.GMultiTraining;
 import ch.opentrainingcenter.gui.model.GTraining;
 
@@ -23,16 +22,13 @@ public class GTrainingService {
     @Inject
     private GpsFileService fileService;
 
-    @Inject
-    private MyApplicationScope scope;
-
     public GTraining loadTraining(final long dbId) {
         final Training training = service.findFullTraining(dbId);
         return new GTraining(training, training.getTrackPoints());
     }
 
     public GTraining storeGpsFile(final InputStream stream) {
-        return new GTraining(fileService.convertAndStoreGpsFile(stream, scope.getApplicationUserId()));
+        return new GTraining(fileService.convertAndStoreGpsFile(stream));
     }
 
     public GMultiTraining loadMultiTrainings(final Collection<Long> ids) {

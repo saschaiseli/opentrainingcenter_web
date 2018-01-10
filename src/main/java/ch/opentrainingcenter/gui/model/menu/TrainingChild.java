@@ -9,7 +9,7 @@ public class TrainingChild extends DefaultTreeNode {
     private static final long serialVersionUID = 1L;
     private final GTraining training;
 
-    protected TrainingChild(final GTraining training) {
+    public TrainingChild(final GTraining training) {
         super(training.getStartDatum());
         this.training = training;
     }
