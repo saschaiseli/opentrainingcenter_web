@@ -2,17 +2,26 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
-<body>
+<h:head>
+	<title>OpenTrainingCenter</title>
+	<h:outputStylesheet name="opentraining.css" library="css" />
+	<meta charset="utf-8" />
+</h:head>
+<h:body>
 	<f:view contracts="#{view.locale.language}">
-		<form method="post" action="j_security_check">
-			<h:panelGrid columns="2">
-				<h:outputLabel value="#{msg['login.email']}:" />
-				<input type="text" name="j_username" />
-				<h:outputLabel value="#{msg['login.password']}:" />
-				<input type="password" name="j_password" />
-			</h:panelGrid>
-			<input type="submit" value="#{msg['login.login']}" />
-		</form>
+		<div id="container">
+			<div id="loginForm">
+				<form method="post" action="j_security_check">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="#{msg['login.email']}:" />
+						<input type="text" name="j_username" />
+						<h:outputLabel value="#{msg['login.password']}:" />
+						<input type="password" name="j_password" />
+					</h:panelGrid>
+					<input type="submit" value="#{msg['login.login']}" />
+				</form>
+			</div>
+		</div>
 	</f:view>
-</body>
+</h:body>
 </html>

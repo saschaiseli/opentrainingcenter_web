@@ -6,6 +6,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title>OpenTrainingCenter</title>
+	<h:outputStylesheet name="opentraining.css" library="css" />
 	<meta charset="utf-8" />
 	<!-- key only for localhost -->
 	<script type="text/javascript"
@@ -28,20 +29,18 @@
 	</script>
 </h:head>
 <h:body>
-	<h:outputStylesheet name="/screen_1.css" />
+
 	<div id="container">
 		<div id="content">
 			<div id="top">
-			<h:form>
-				<h:panelGroup id="loginout">
+				<h:form>
 					<h:outputText value="#{securitySession.getName()}" />
 					<h:commandLink value="logout" action="#{securitySession.logout}" />
-				</h:panelGroup>
 				</h:form>
 			</div>
 			<div id="left">
-				<h:form id="treeNavigation">
-					<p:tree id="tr" value="#{menuView.root}" var="node"
+				<h:form>
+					<p:tree id="treeMenu" value="#{menuView.root}" var="node"
 						selectionMode="single" selection="#{menuView.selectedNode}"
 						animate="true" dynamic="true">
 						<p:ajax event="select" listener="#{menuView.onNodeSelect}" />

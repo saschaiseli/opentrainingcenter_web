@@ -15,10 +15,19 @@ div#container {
 	min-height: 100%; /* normale Browser */
 	background-color: orange;
 }
-div#top{
+
+div#top {
 	float: top;
 	height: 20px;
+	text-align: right;
 }
+div#loginForm {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 #left {
 	float: left;
 	width: 200px;
@@ -66,8 +75,23 @@ h2 {
 	font-size: 1.2em;
 }
 
-/*** override primefaces styles ***/
+/**
+ * Override PrimeFaces' default CSS
+ */
+
 .ui-tree {
-	position: relative;
-	width: 200px;
+    width: 200px !important;
+    position: relative;
+}
+
+.ui-tree-node-label {
+    font-size: 0.7em;
+}
+
+.ui-widget, .ui-widget .ui-widget {
+    font-size: 95% !important;
+}
+
+.ui-widget-content {
+    border: 0;
 }
